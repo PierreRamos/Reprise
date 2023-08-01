@@ -26,6 +26,9 @@ public class System_PlayerInput : MonoBehaviour
     [SerializeField]
     private GameEvent onPlayerDashInput;
 
+    [SerializeField]
+    private GameEvent onPlayerUseConsumableInput;
+
     private float parryHoldTime;
 
     private float currentHorizontalMovement;
@@ -66,6 +69,34 @@ public class System_PlayerInput : MonoBehaviour
         }
     }
 
+    //Player shoot input (tap)
+    public void PlayerShoot(InputAction.CallbackContext context)
+    {
+        if (context.performed && !disableMovement)
+        {
+            onPlayerShootInput.Raise(this, null);
+        }
+    }
+
+    //Player dash input (tap)
+    public void PlayerDash(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isPerformed_PlayerBlockInput)
+        {
+            onPlayerDashInput.Raise(this, null);
+        }
+    }
+
+    //Player use consumable (tap)
+    public void PlayerUseConsumable(InputAction.CallbackContext context)
+    {
+        if (context.performed && !disableMovement)
+        {
+            onPlayerUseConsumableInput.Raise(this, null);
+        }
+    }
+
+    //Player block input (hold)
     public void PlayerBlock(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -79,15 +110,7 @@ public class System_PlayerInput : MonoBehaviour
         }
     }
 
-    public void PlayerShoot(InputAction.CallbackContext context)
-    {
-        if (context.performed && !isStaggered)
-        {
-            onPlayerShootInput.Raise(this, null);
-        }
-    }
-
-    //Player movement input
+    //Player movement input (hold)
     public void PlayerMovement(InputAction.CallbackContext context)
     {
         currentHorizontalMovement = context.ReadValue<Vector2>().x;
@@ -101,14 +124,6 @@ public class System_PlayerInput : MonoBehaviour
         {
             isPerformed_PlayerMovementInput = false;
             onPlayerMovementInput.Raise(this, 0f);
-        }
-    }
-
-    public void PlayerDash(InputAction.CallbackContext context)
-    {
-        if (context.performed && !isPerformed_PlayerBlockInput)
-        {
-            onPlayerDashInput.Raise(this, null);
         }
     }
 

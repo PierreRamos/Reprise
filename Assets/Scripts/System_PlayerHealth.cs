@@ -32,11 +32,11 @@ public class System_PlayerHealth : MonoBehaviour
 
     public void UpdateHealthValue(Component sender, object data)
     {
-        if (healthValue + (float) data > maxHealth)
+        if (healthValue + (float)data > maxHealth)
         {
             healthValue = maxHealth;
         }
-        else if (healthValue + (float) data < 0)
+        else if (healthValue + (float)data < 0)
         {
             healthValue = 0;
             healthIsEmpty = true;
@@ -44,7 +44,21 @@ public class System_PlayerHealth : MonoBehaviour
         }
         else
         {
-            healthValue += (float) data;
+            healthValue += (float)data;
+        }
+        onHealthValueChange.Raise(this, healthValue);
+    }
+
+    //Increase health value
+    public void IncreaseHealthValue(float healthIncrease)
+    {
+        if (healthValue + healthIncrease > maxHealth)
+        {
+            healthValue = maxHealth;
+        }
+        else
+        {
+            healthValue += healthIncrease;
         }
         onHealthValueChange.Raise(this, healthValue);
     }

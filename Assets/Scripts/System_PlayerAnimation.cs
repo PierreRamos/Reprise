@@ -14,10 +14,20 @@ public class System_PlayerAnimation : MonoBehaviour
         animator.SetFloat("HorizontalVelocity", horizontalVelocity);
     }
 
+    public void TriggerPlayerIdle()
+    {
+        animator.SetTrigger("PlayerIdle");
+    }
+
     public void TriggerHitAnimation()
     {
         int randomNumber = Random.Range(1, 3);
         animator.SetTrigger($"PlayerHit{randomNumber}");
+    }
+
+    public void TriggerPlayerHealthPotion()
+    {
+        animator.SetTrigger("PlayerHealthPotion");
     }
 
     public void TriggerEmpoweredBulletCastAnimation()
@@ -66,12 +76,12 @@ public class System_PlayerAnimation : MonoBehaviour
 
     public void SetPlayerIsMoving(Component sender, object data)
     {
-        bool isMoving = (bool) data;
+        bool isMoving = (bool)data;
         animator.SetBool("PlayerIsMoving", isMoving);
     }
 
     public void UpdatePlayerHorizontalVelocity(Component sender, object data)
     {
-        horizontalVelocity = (float) data;
+        horizontalVelocity = (float)data;
     }
 }
