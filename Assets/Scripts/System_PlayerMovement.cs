@@ -11,13 +11,10 @@ public class System_PlayerMovement : MonoBehaviour
     private float speed;
 
     [SerializeField]
-    private float parryHoldSpeed;
+    private float parryHoldMovementSpeed;
 
     [SerializeField]
     private float dashForce;
-
-    [SerializeField]
-    private float parryMovementPenaltyTime;
 
     [SerializeField]
     private GameEvent onPlayerPositionRequest;
@@ -31,52 +28,35 @@ public class System_PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameEvent onPlayerUpdateVelocity;
 
+    [SerializeField]
+    private GameEvent onPlayerPushbackFinish;
+
     private float horizontal;
 
     private bool isFacingRight = true;
 
-    private bool isBeingPushedBack;
-
-    private bool isDashing;
-
     private bool onParryHoldSpeed;
-
-    private bool isRunning_PlayerPushBackMovementPenaltyTimer;
-
-    private Coroutine current_PlayerPushBackMovementPenaltyTimer;
 
     private void Update()
     {
-        if (isFacingRight && horizontal < 0f)
-        {
-            Flip();
-        }
-        else if (!isFacingRight && horizontal > 0f)
-        {
-            Flip();
-        }
-
         //Sends velocity x when player's x velocity is not equal to zero
-        if (rb.velocity.x != 0)
-        {
-            onPlayerUpdateVelocity.Raise(this, rb.velocity.x);
-        }
-
-        //debug
-        // if (isDashing)
+        // if (rb.velocity.x != 0)
         // {
-        //     print(rb.velocity);
+        //     onPlayerUpdateVelocity.Raise(this, rb.velocity.x);
         // }
+
+        //Test
+        onPlayerUpdateVelocity.Raise(this, rb.velocity.x);
     }
 
     private void FixedUpdate()
     {
-        if (!isBeingPushedBack && !isDashing)
+        if (!isDashing && !isPushedBack)
         {
             if (onParryHoldSpeed)
             {
                 rb.velocity = new Vector3(
-                    horizontal * parryHoldSpeed * Time.deltaTime,
+                    horizontal * parryHoldMovementSpeed * Time.deltaTime,
                     rb.velocity.y,
                     0f
                 );
@@ -86,12 +66,6 @@ public class System_PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector3(horizontal * speed * Time.deltaTime, rb.velocity.y, 0f);
             }
         }
-    }
-
-    private void Flip()
-    {
-        isFacingRight = !isFacingRight;
-        // transform.Rotate(0f, 180f, 0f);
     }
 
     public void GetHorizontalInput(Component sender, object data)
@@ -108,6 +82,8 @@ public class System_PlayerMovement : MonoBehaviour
     {
         onParryHoldSpeed = value;
     }
+
+    private bool isDashing;
 
     public void PlayerDash()
     {
@@ -127,27 +103,35 @@ public class System_PlayerMovement : MonoBehaviour
         }
     }
 
-    //Pushes the player back by amount force
-    public void StartPlayerPushBack(float pushBackForce)
-    {
-        if (isRunning_PlayerPushBackMovementPenaltyTimer)
-        {
-            StopCoroutine(current_PlayerPushBackMovementPenaltyTimer);
-        }
-        current_PlayerPushBackMovementPenaltyTimer = StartCoroutine(
-            PlayerPushBackMovementPenaltyTimer(pushBackForce)
-        );
-    }
+    //Pushes the player back by amount force (Does not stop player movement)
 
-    //Pushes back player for certain amount of time and cannot move for a while
-    IEnumerator PlayerPushBackMovementPenaltyTimer(float pushBackForce)
+    private bool isPushedBack;
+
+    private bool isRunning_PlayerPushBack;
+
+    private Coroutine current_PlayerPushBack;
+
+    public void PlayerPushBack(float pushBackForce)
     {
-        isRunning_PlayerPushBackMovementPenaltyTimer = true;
-        isBeingPushedBack = true;
-        rb.velocity = Vector3.zero;
+        isPushedBack = true;
+        Vector3 temp = rb.velocity;
+        temp.x = 0f;
+        rb.velocity = temp;
         rb.AddForce(-transform.right * pushBackForce, ForceMode.Impulse);
-        yield return new WaitForSeconds(parryMovementPenaltyTime);
-        isBeingPushedBack = false;
-        isRunning_PlayerPushBackMovementPenaltyTimer = false;
+        if (isRunning_PlayerPushBack)
+        {
+            StopCoroutine(current_PlayerPushBack);
+        }
+        current_PlayerPushBack = StartCoroutine(Timer());
+
+        IEnumerator Timer()
+        {
+            isRunning_PlayerPushBack = true;
+            yield return new WaitUntil(() => rb.velocity.x != 0f);
+            yield return new WaitUntil(() => rb.velocity.x == 0f);
+            isPushedBack = false;
+            onPlayerPushbackFinish.Raise(this, null);
+            isRunning_PlayerPushBack = false;
+        }
     }
 }

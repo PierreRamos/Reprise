@@ -43,12 +43,10 @@ public class System_PlayerInput : MonoBehaviour
 
     private bool isPerformed_PlayerMovementInput;
 
-    private bool disableMovement;
-
     private void Update()
     {
         //Checks if player is still moving (movement key is still held) and if is not staggered
-        if (isPerformed_PlayerMovementInput && !disableMovement)
+        if (isPerformed_PlayerMovementInput && !disableInput)
         {
             onPlayerActivelyMoving.Raise(this, true);
             onPlayerMovementInput.Raise(this, currentHorizontalMovement);
@@ -59,7 +57,7 @@ public class System_PlayerInput : MonoBehaviour
         }
 
         // Check if parry is held and also checks if player is not staggered
-        if (isPerformed_PlayerBlockInput && !disableMovement)
+        if (isPerformed_PlayerBlockInput && !disableInput)
         {
             onParryHold.Raise(this, null);
         }
@@ -72,7 +70,7 @@ public class System_PlayerInput : MonoBehaviour
     //Player shoot input (tap)
     public void PlayerShoot(InputAction.CallbackContext context)
     {
-        if (context.performed && !disableMovement)
+        if (context.performed && !disableInput)
         {
             onPlayerShootInput.Raise(this, null);
         }
@@ -90,7 +88,7 @@ public class System_PlayerInput : MonoBehaviour
     //Player use consumable (tap)
     public void PlayerUseConsumable(InputAction.CallbackContext context)
     {
-        if (context.performed && !disableMovement)
+        if (context.performed && !disableInput)
         {
             onPlayerUseConsumableInput.Raise(this, null);
         }
@@ -127,12 +125,62 @@ public class System_PlayerInput : MonoBehaviour
         }
     }
 
-    //--SET INPUT STATUS--
+    //--SET STATUS--
+
+    private bool disableInput;
+
+    //Enables player input
+    public void EnableInput()
+    {
+        disableInput = false;
+    }
+
+    //Disables player input and needs to be enabled
+    public void DisableInput(bool isFullStop)
+    {
+        if (isFullStop)
+        {
+            disableInput = true;
+            onPlayerMovementInput.Raise(this, 0f);
+        }
+        else
+        {
+            disableInput = true;
+        }
+    }
+
+    //Disables player input but within a certain time
+    private bool isRunning_DisableInputTimer;
+
+    private Coroutine current_DisableInputTimer;
+
+    public void DisableInputTimer(float time)
+    {
+        disableInput = true;
+        if (isRunning_DisableInputTimer)
+        {
+            StopCoroutine(current_DisableInputTimer);
+        }
+        current_DisableInputTimer = StartCoroutine(Timer());
+
+        IEnumerator Timer()
+        {
+            isRunning_DisableInputTimer = true;
+            yield return new WaitForSeconds(time);
+            disableInput = false;
+            isRunning_DisableInputTimer = false;
+        }
+    }
+
+    private bool disableMovement;
+
+    //Enables player movement
     public void EnableMovement()
     {
         disableMovement = false;
     }
 
+    //Disables player movement and needs to be enabled
     public void DisableMovement(bool isFullStop)
     {
         if (isFullStop)
@@ -143,6 +191,29 @@ public class System_PlayerInput : MonoBehaviour
         else
         {
             disableMovement = true;
+        }
+    }
+
+    //Disables player movement but within a certain time
+    private bool isRunning_DisableMovementTimer;
+
+    private Coroutine current_DisableMovementTimer;
+
+    public void DisableMovementTimer(float time)
+    {
+        disableMovement = true;
+        if (isRunning_DisableMovementTimer)
+        {
+            StopCoroutine(current_DisableMovementTimer);
+        }
+        current_DisableMovementTimer = StartCoroutine(Timer());
+
+        IEnumerator Timer()
+        {
+            isRunning_DisableMovementTimer = true;
+            yield return new WaitForSeconds(time);
+            disableMovement = false;
+            isRunning_DisableMovementTimer = false;
         }
     }
 }

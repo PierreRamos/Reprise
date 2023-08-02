@@ -1255,7 +1255,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1813599411}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &567343815
 GameObject:
@@ -3050,6 +3050,7 @@ GameObject:
   - component: {fileID: 1138985495}
   - component: {fileID: 1138985494}
   - component: {fileID: 1138985502}
+  - component: {fileID: 1138985503}
   m_Layer: 3
   m_Name: PlayerMovement
   m_TagString: Untagged
@@ -3070,7 +3071,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1813599411}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1138985493
 MonoBehaviour:
@@ -3086,13 +3087,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1813599441}
   speed: 200
-  parryHoldSpeed: 0
+  parryHoldMovementSpeed: 0
   dashForce: 5
-  parryMovementPenaltyTime: 0.3
   onPlayerPositionRequest: {fileID: 11400000, guid: 5cdcad91059874842a362cc37e6dc2c2, type: 2}
   onPlayerDash: {fileID: 11400000, guid: 62af2a170e0a04049b3a09cb11b92524, type: 2}
   onPlayerDashFinish: {fileID: 11400000, guid: f705965e7110001469563ecb545fbf72, type: 2}
   onPlayerUpdateVelocity: {fileID: 11400000, guid: 3265720ab1fabe348b5e306fc606cf3f, type: 2}
+  onPlayerPushbackFinish: {fileID: 11400000, guid: 5e9e3edea84e3794ebc4e57328608656, type: 2}
 --- !u!114 &1138985494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,13 +3112,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1138985493}
         m_TargetAssemblyTypeName: System_PlayerMovement, Assembly-CSharp
-        m_MethodName: StartPlayerPushBack
+        m_MethodName: PlayerPushBack
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 5
+          m_FloatArgument: 6
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3195,13 +3196,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1138985493}
         m_TargetAssemblyTypeName: System_PlayerMovement, Assembly-CSharp
-        m_MethodName: StartPlayerPushBack
+        m_MethodName: PlayerPushBack
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 1.5
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3223,7 +3224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1138985493}
         m_TargetAssemblyTypeName: System_PlayerMovement, Assembly-CSharp
-        m_MethodName: StartPlayerPushBack
+        m_MethodName: PlayerPushBack
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3342,6 +3343,34 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1138985503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138985491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 265d7094fddddc4419a84a8c0ce7b98f, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1138985493}
+        m_TargetAssemblyTypeName: System_PlayerMovement, Assembly-CSharp
+        m_MethodName: PlayerPushBack
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -4333,7 +4362,6 @@ GameObject:
   - component: {fileID: 1543279993}
   - component: {fileID: 1543280006}
   - component: {fileID: 1543280007}
-  - component: {fileID: 1543280008}
   m_Layer: 3
   m_Name: PlayerAnimations
   m_TagString: Untagged
@@ -4354,7 +4382,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1813599411}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1543279993
 MonoBehaviour:
@@ -4724,34 +4752,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1543280004}
         m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
         m_MethodName: TriggerPlayerHealthPotion
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1543280008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543279991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 22f2c2ec217aab742ba8ae363a8e5bcc, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1543280004}
-        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
-        m_MethodName: TriggerPlayerIdle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5351,6 +5351,7 @@ GameObject:
   - component: {fileID: 1813599437}
   - component: {fileID: 1813599443}
   - component: {fileID: 1813599442}
+  - component: {fileID: 1813599453}
   - component: {fileID: 1813599444}
   - component: {fileID: 1813599445}
   - component: {fileID: 1813599447}
@@ -5358,6 +5359,8 @@ GameObject:
   - component: {fileID: 1813599449}
   - component: {fileID: 1813599448}
   - component: {fileID: 1813599451}
+  - component: {fileID: 1813599452}
+  - component: {fileID: 1813599454}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -5443,9 +5446,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 778727843}
+  - {fileID: 521243421}
   - {fileID: 1138985492}
   - {fileID: 1543279992}
-  - {fileID: 521243421}
   - {fileID: 1857180525}
   - {fileID: 173108554}
   - {fileID: 720586393}
@@ -5701,6 +5704,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: DisableMovementTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1813599427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5729,6 +5744,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: DisableMovementTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1813599428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5747,7 +5774,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: DisableMovement
+        m_MethodName: DisableInput
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5775,7 +5802,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: EnableMovement
+        m_MethodName: EnableInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5926,7 +5953,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: DisableMovement
+        m_MethodName: DisableInput
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5982,7 +6009,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: EnableMovement
+        m_MethodName: EnableInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6010,7 +6037,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: EnableMovement
+        m_MethodName: EnableInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6038,7 +6065,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: DisableMovement
+        m_MethodName: DisableInput
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6066,7 +6093,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: EnableMovement
+        m_MethodName: EnableInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6094,7 +6121,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: DisableMovement
+        m_MethodName: DisableInput
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6136,7 +6163,91 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
-        m_MethodName: EnableMovement
+        m_MethodName: EnableInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1813599452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813599407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 265d7094fddddc4419a84a8c0ce7b98f, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: DisableInputTimer
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.3
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1813599453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813599407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1235b35cd92dd0940ba7ca3f94908533, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: DisableInput
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1813599454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813599407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 5e9e3edea84e3794ebc4e57328608656, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: EnableInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6290,7 +6401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58eef61ff14285d4db598e2338cb5ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 9999
   onHealthUpdateUI: {fileID: 11400000, guid: ccc3f443ddac07e47a1763a961e92f6a, type: 2}
   onHealthValueChange: {fileID: 11400000, guid: 082e297b4a81c9a4ab3c9c8236c5be74, type: 2}
   DEBUG_onGameEnd: {fileID: 11400000, guid: 946146d5c39f1c94dab5721b8c8ada71, type: 2}

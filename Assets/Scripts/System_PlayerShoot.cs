@@ -50,7 +50,37 @@ public class System_PlayerShoot : MonoBehaviour
     {
         if (enable_PlayerShoot)
         {
-            StartCoroutine(PlayerShootCast(isFull_SpecialMeter));
+            StartCoroutine(PlayerShootCast());
+        }
+
+        //Spawn player bullet after cast time and checks if special meter is full
+        IEnumerator PlayerShootCast()
+        {
+            enable_PlayerShoot = false;
+
+            //If special meter is full or not, decides which cast time to do
+            if (isFull_SpecialMeter)
+            {
+                onPlayerShootEmpoweredBulletCast.Raise(this, null);
+                yield return new WaitForSecondsRealtime(1.25f);
+            }
+            else
+            {
+                onPlayerShootBulletCast.Raise(this, null);
+                yield return new WaitForSeconds(playerShootCastTime);
+            }
+
+            //Check if special meter is full and decides which bullet to spawn
+            if (isFull_SpecialMeter)
+            {
+                onPlayerShootEmpoweredBullet.Raise(this, null);
+                Instantiate(empoweredBullet, shootPoint.position, bullet.transform.rotation);
+            }
+            else
+            {
+                Instantiate(bullet, shootPoint.position, bullet.transform.rotation);
+                onPlayerShootBullet.Raise(this, null);
+            }
         }
     }
 
@@ -58,36 +88,6 @@ public class System_PlayerShoot : MonoBehaviour
     public void SetSpecialMeterIsFull(Component sender, object data)
     {
         isFull_SpecialMeter = (bool)data;
-    }
-
-    //Spawn player bullet after cast time and checks if special meter is full
-    IEnumerator PlayerShootCast(bool value)
-    {
-        enable_PlayerShoot = false;
-
-        //If special meter is full or not, decides which cast time to do
-        if (value)
-        {
-            onPlayerShootEmpoweredBulletCast.Raise(this, null);
-            yield return new WaitForSecondsRealtime(1.25f);
-        }
-        else
-        {
-            onPlayerShootBulletCast.Raise(this, null);
-            yield return new WaitForSeconds(playerShootCastTime);
-        }
-
-        //Check if special meter is full and decides which bullet to spawn
-        if (value)
-        {
-            onPlayerShootEmpoweredBullet.Raise(this, null);
-            Instantiate(empoweredBullet, shootPoint.position, bullet.transform.rotation);
-        }
-        else
-        {
-            Instantiate(bullet, shootPoint.position, bullet.transform.rotation);
-            onPlayerShootBullet.Raise(this, null);
-        }
     }
 
     //Gets called when player shot bullet event

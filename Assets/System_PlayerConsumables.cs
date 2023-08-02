@@ -46,7 +46,10 @@ public class System_PlayerConsumables : MonoBehaviour
 
     public void InterruptConsumable()
     {
-        canUse_Consumable = true;
-        onPlayerInterruptedDuringConsumable.Raise(this, null);
+        if (canUse_Consumable == false)
+        {
+            canUse_Consumable = true;
+            onPlayerInterruptedDuringConsumable.Raise(this, null);
+        }
     }
 }

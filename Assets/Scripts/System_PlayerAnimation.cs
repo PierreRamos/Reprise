@@ -14,11 +14,6 @@ public class System_PlayerAnimation : MonoBehaviour
         animator.SetFloat("HorizontalVelocity", horizontalVelocity);
     }
 
-    public void TriggerPlayerIdle()
-    {
-        animator.SetTrigger("PlayerIdle");
-    }
-
     public void TriggerHitAnimation()
     {
         int randomNumber = Random.Range(1, 3);
