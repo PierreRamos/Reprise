@@ -869,38 +869,42 @@ MonoBehaviour:
     -Press "RMB" to deflect or Hold to block
 
     -Press "LMB"
-    to attack
+    to shoot
 
-    -You can move with A and D
+    -Press "E" to heal
 
-    -Hold block to recover resolve
-    (Stamina)
+    -Press "L-Shift" to dash
 
-    -If special bar is full, the next attack will be empowered and
-    stuns the enemy
+    -You can
+    move with A and D
+
+    -Hold block to recover resolve (Stamina)
+
+    -If special
+    bar is full, the next attack will be empowered and stuns the enemy
 
 
     FEATURES:
 
-    -Enemy flash indicates start of attack string
+    -Enemy
+    flash indicates start of attack string
 
-    -Deflecting
-    (less) or blocking (more) decreases resolve (Stamina)
+    -Deflecting (less) or blocking (more)
+    decreases resolve (Stamina)
 
-    -Deflecting decreases
-    enemy resolve (consecutive does more)
+    -Deflecting decreases enemy resolve (consecutive
+    does more)
 
-    -If stamina meter depletes, the player
-    will be staggered (Cannot move)
+    -If stamina meter depletes, the player will be staggered (Cannot
+    move)
 
 
     CONDITIONS:
 
-    -If player''s health goes
-    to 0, player loses
+    -If player''s health goes to 0, player loses
 
-    -If enemy''s health or resolve (stamina) goes to 0, player
-    wins
+    -If
+    enemy''s health or resolve (stamina) goes to 0, player wins
 
 '
   m_isRightToLeft: 0
@@ -1801,6 +1805,7 @@ GameObject:
   - component: {fileID: 720586394}
   - component: {fileID: 720586397}
   - component: {fileID: 720586396}
+  - component: {fileID: 720586398}
   - component: {fileID: 720586395}
   m_Layer: 3
   m_Name: PlayerConsumable
@@ -1839,6 +1844,8 @@ MonoBehaviour:
   onPlayerUseConsumable: {fileID: 11400000, guid: c2658790e503f87419b3a5884d21f4bd, type: 2}
   onPlayerUseHealthPotion: {fileID: 11400000, guid: 39541027470bb474aabb5fa2f978029a, type: 2}
   onPlayerInterruptedDuringConsumable: {fileID: 11400000, guid: 22f2c2ec217aab742ba8ae363a8e5bcc, type: 2}
+  updatePotionUI: {fileID: 11400000, guid: aa887e74bbadc5e4287a2b822c49ed41, type: 2}
+  potionCount: 3
 --- !u!114 &720586395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,6 +1928,34 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &720586398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720586392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: cb958a3f757a2404c8811557abcbc52e, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 720586394}
+        m_TargetAssemblyTypeName: System_PlayerConsumables, Assembly-CSharp
+        m_MethodName: UsedConsumable
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Potion
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &725310554
@@ -3555,6 +3590,8 @@ GameObject:
   - component: {fileID: 1367039030}
   - component: {fileID: 1367039033}
   - component: {fileID: 1367039037}
+  - component: {fileID: 1367039039}
+  - component: {fileID: 1367039038}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3611,7 +3648,7 @@ MonoBehaviour:
   healthSlider: {fileID: 1588880975}
   staminaSlider: {fileID: 618588514}
   specialSlider: {fileID: 384857385}
-  potionText: {fileID: 0}
+  potionText: {fileID: 305705925}
 --- !u!114 &1367039030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3747,6 +3784,62 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1367039038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367039015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: cb958a3f757a2404c8811557abcbc52e, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1367039029}
+        m_TargetAssemblyTypeName: System_UIManager, Assembly-CSharp
+        m_MethodName: UpdatePotionUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1367039039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367039015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: aa887e74bbadc5e4287a2b822c49ed41, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1367039029}
+        m_TargetAssemblyTypeName: System_UIManager, Assembly-CSharp
+        m_MethodName: SetPotionCount
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1444462097
 GameObject:
@@ -5843,6 +5936,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 24919d3f-9320-40ff-9a2a-e68810cee640
     m_ActionName: Player/UseConsumable[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ef36c1ae-0754-4014-b14e-7ea53698855a
+    m_ActionName: Player/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5868,6 +5977,8 @@ MonoBehaviour:
   onPlayerShootInput: {fileID: 11400000, guid: b98afcc76e2b64944b9bbc6791f24e43, type: 2}
   onPlayerDashInput: {fileID: 11400000, guid: 0c37a2e374e811a4daf1c273c78e992d, type: 2}
   onPlayerUseConsumableInput: {fileID: 11400000, guid: 694baf0af061fb64a86f02d3c8d51464, type: 2}
+  onPauseGame: {fileID: 11400000, guid: 883a3085fa2d3f14fb17f1bb8b6155e6, type: 2}
+  onUnpauseGame: {fileID: 11400000, guid: 76db1f9c1cb1ad84b8c7d205d88179ef, type: 2}
 --- !u!95 &1813599421
 Animator:
   serializedVersion: 4
@@ -6821,6 +6932,8 @@ GameObject:
   - component: {fileID: 1899582395}
   - component: {fileID: 1899582394}
   - component: {fileID: 1899582396}
+  - component: {fileID: 1899582398}
+  - component: {fileID: 1899582397}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -6909,6 +7022,86 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 1.25
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1899582397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899582392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 76db1f9c1cb1ad84b8c7d205d88179ef, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1899582395}
+        m_TargetAssemblyTypeName: System_TimeManager, Assembly-CSharp
+        m_MethodName: SetNormalTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 810578488}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1899582398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899582392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 883a3085fa2d3f14fb17f1bb8b6155e6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1899582395}
+        m_TargetAssemblyTypeName: System_TimeManager, Assembly-CSharp
+        m_MethodName: SetPauseTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 810578488}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
