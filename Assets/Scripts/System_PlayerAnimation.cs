@@ -14,10 +14,14 @@ public class System_PlayerAnimation : MonoBehaviour
         animator.SetFloat("HorizontalVelocity", horizontalVelocity);
     }
 
+    //Trigger player hit animation except when player is stunned
     public void TriggerHitAnimation()
     {
-        int randomNumber = Random.Range(1, 3);
-        animator.SetTrigger($"PlayerHit{randomNumber}");
+        if (playerIsStunned == false)
+        {
+            int randomNumber = Random.Range(1, 3);
+            animator.SetTrigger($"PlayerHit{randomNumber}");
+        }
     }
 
     public void TriggerPlayerHealthPotion()
@@ -73,6 +77,14 @@ public class System_PlayerAnimation : MonoBehaviour
     {
         bool isMoving = (bool)data;
         animator.SetBool("PlayerIsMoving", isMoving);
+    }
+
+    private bool playerIsStunned;
+
+    public void SetPlayerIsStunned(bool value)
+    {
+        playerIsStunned = value;
+        animator.SetBool("PlayerIsStunned", playerIsStunned);
     }
 
     public void UpdatePlayerHorizontalVelocity(Component sender, object data)

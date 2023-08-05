@@ -33,8 +33,6 @@ public class System_PlayerMovement : MonoBehaviour
 
     private float horizontal;
 
-    private bool isFacingRight = true;
-
     private bool onParryHoldSpeed;
 
     private void Update()

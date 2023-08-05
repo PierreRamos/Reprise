@@ -15,27 +15,37 @@ public class System_PlayerConsumables : MonoBehaviour
     [SerializeField]
     private GameEvent onPlayerInterruptedDuringConsumable;
 
+    [SerializeField]
+    private GameEvent updatePotionUI;
+
+    [SerializeField]
+    private int potionCount;
+
     private bool canUse_Consumable;
 
     private void Start()
     {
         canUse_Consumable = true;
+        updatePotionUI.Raise(this, potionCount);
     }
 
     public void UseConsumable()
     {
         if (canUse_Consumable)
         {
-            //temporary since potion is the only consumable currently
-            UseHealthPotion();
-            onPlayerUseConsumable.Raise(this, null);
+            //Potion
+            if (potionCount > 0)
+            {
+                UseHealthPotion();
+                onPlayerUseConsumable.Raise(this, null);
+            }
         }
 
         //local functions
         void UseHealthPotion()
         {
             canUse_Consumable = false;
-            onPlayerUseHealthPotion.Raise(this, null);
+            onPlayerUseHealthPotion.Raise(this, potionCount);
         }
     }
 
@@ -50,6 +60,15 @@ public class System_PlayerConsumables : MonoBehaviour
         {
             canUse_Consumable = true;
             onPlayerInterruptedDuringConsumable.Raise(this, null);
+        }
+    }
+
+    public void UsedConsumable(string consumable)
+    {
+        if (consumable.Equals("Potion"))
+        {
+            potionCount--;
+            updatePotionUI.Raise(this, potionCount);
         }
     }
 }

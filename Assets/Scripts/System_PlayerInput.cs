@@ -29,6 +29,12 @@ public class System_PlayerInput : MonoBehaviour
     [SerializeField]
     private GameEvent onPlayerUseConsumableInput;
 
+    [SerializeField]
+    private GameEvent onPauseGame;
+
+    [SerializeField]
+    private GameEvent onUnpauseGame;
+
     private float parryHoldTime;
 
     private float currentHorizontalMovement;
@@ -94,6 +100,25 @@ public class System_PlayerInput : MonoBehaviour
         }
     }
 
+    private bool isGamePaused;
+
+    public void PauseGame(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (isGamePaused == false)
+            {
+                onPauseGame.Raise(this, null);
+                isGamePaused = true;
+            }
+            else
+            {
+                onUnpauseGame.Raise(this, null);
+                isGamePaused = false;
+            }
+        }
+    }
+
     //Player block input (hold)
     public void PlayerBlock(InputAction.CallbackContext context)
     {
@@ -126,13 +151,21 @@ public class System_PlayerInput : MonoBehaviour
     }
 
     //--SET STATUS--
+    private bool playerIsStunned;
 
     private bool disableInput;
 
     //Enables player input
-    public void EnableInput()
+    public void EnableInput(Component sender, object data)
     {
-        disableInput = false;
+        if (playerIsStunned == false)
+        {
+            disableInput = false;
+        }
+        else if (sender is System_StaminaManager && ((string)data).Equals("StaggerDone"))
+        {
+            disableInput = false;
+        }
     }
 
     //Disables player input and needs to be enabled
@@ -149,7 +182,7 @@ public class System_PlayerInput : MonoBehaviour
         }
     }
 
-    //Disables player input but within a certain time
+    //Disables player input but within a certain time except when player is stunned
     private bool isRunning_DisableInputTimer;
 
     private Coroutine current_DisableInputTimer;
@@ -167,7 +200,10 @@ public class System_PlayerInput : MonoBehaviour
         {
             isRunning_DisableInputTimer = true;
             yield return new WaitForSeconds(time);
-            disableInput = false;
+            if (playerIsStunned == false)
+            {
+                disableInput = false;
+            }
             isRunning_DisableInputTimer = false;
         }
     }
@@ -215,5 +251,11 @@ public class System_PlayerInput : MonoBehaviour
             disableMovement = false;
             isRunning_DisableMovementTimer = false;
         }
+    }
+
+    //Set PlayerIsStunned
+    public void SetPlayerIsStunned(bool value)
+    {
+        playerIsStunned = value;
     }
 }

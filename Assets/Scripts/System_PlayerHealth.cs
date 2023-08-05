@@ -18,8 +18,6 @@ public class System_PlayerHealth : MonoBehaviour
 
     private float healthValue;
 
-    private bool healthIsEmpty;
-
     private void Start()
     {
         healthValue = maxHealth;
@@ -39,7 +37,6 @@ public class System_PlayerHealth : MonoBehaviour
         else if (healthValue + (float)data < 0)
         {
             healthValue = 0;
-            healthIsEmpty = true;
             DEBUG_onGameEnd.Raise(this, null);
         }
         else

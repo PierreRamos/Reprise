@@ -27,6 +27,11 @@ public class System_TimeManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void SetPauseTime()
+    {
+        Time.timeScale = 0f;
+    }
+
     //Called by those who want to slow time (ex. shoot player empowered bullet)
     public void SetSlowTime(float value)
     {

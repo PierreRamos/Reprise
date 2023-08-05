@@ -59,10 +59,7 @@ public class System_StaminaManager : MonoBehaviour
         //Stamina Recovery System
         if (parryIsHeld && canRecoverStamina && staminaValue < maxStamina)
         {
-            if (
-                staminaValue + (staminaRecoveryRate * Time.deltaTime) >
-                maxStamina
-            )
+            if (staminaValue + (staminaRecoveryRate * Time.deltaTime) > maxStamina)
             {
                 staminaValue = maxStamina;
             }
@@ -112,13 +109,37 @@ public class System_StaminaManager : MonoBehaviour
             {
                 if (isRunning_StartStaminaRecoveryTimer)
                 {
-                    StopCoroutine (current_StartStaminaRecoveryTimer);
+                    StopCoroutine(current_StartStaminaRecoveryTimer);
                 }
-                current_StartStaminaRecoveryTimer =
-                    StartCoroutine(StartStaminaRecoveryTimer());
+                current_StartStaminaRecoveryTimer = StartCoroutine(StartStaminaRecoveryTimer());
                 canRecoverStamina = false;
             }
             staminaValue += value;
+        }
+
+        IEnumerator PlayerStaggerTimer()
+        {
+            isRunning_PlayerStaggerCounter = true;
+            canStaggerPlayer = false;
+            canRecoverStamina = false;
+            yield return new WaitForSeconds(staggerTime);
+            staminaValue = maxStamina;
+            onPlayerStaggerDisable.Raise(this, "StaggerDone");
+            canRecoverStamina = true;
+            canStaggerPlayer = true;
+            isRunning_PlayerStaggerCounter = false;
+        }
+
+        //Starts a delay counter before stamina can recover after stamina is decreased
+        IEnumerator StartStaminaRecoveryTimer()
+        {
+            isRunning_StartStaminaRecoveryTimer = true;
+            yield return new WaitForSeconds(staminaRecoveryDelay);
+            if (!isRunning_PlayerStaggerCounter)
+            {
+                canRecoverStamina = true;
+            }
+            isRunning_StartStaminaRecoveryTimer = false;
         }
     }
 
@@ -131,7 +152,7 @@ public class System_StaminaManager : MonoBehaviour
     //Checks what should be the stamina regen rate based on player Health
     public void UpdateStaminaRecoveryRate(Component sender, object data)
     {
-        float health = (float) data;
+        float health = (float)data;
         if (health < (maxHealth * 0.25))
         {
             staminaRecoveryRate = staminaRecoveryRateBase * 0.01f;
@@ -148,30 +169,5 @@ public class System_StaminaManager : MonoBehaviour
         {
             staminaRecoveryRate = staminaRecoveryRateBase;
         }
-    }
-
-    //Starts a delay counter before stamina can recover after stamina is decreased
-    IEnumerator StartStaminaRecoveryTimer()
-    {
-        isRunning_StartStaminaRecoveryTimer = true;
-        yield return new WaitForSeconds(staminaRecoveryDelay);
-        if (!isRunning_PlayerStaggerCounter)
-        {
-            canRecoverStamina = true;
-        }
-        isRunning_StartStaminaRecoveryTimer = false;
-    }
-
-    IEnumerator PlayerStaggerTimer()
-    {
-        isRunning_PlayerStaggerCounter = true;
-        canStaggerPlayer = false;
-        canRecoverStamina = false;
-        yield return new WaitForSeconds(staggerTime);
-        staminaValue = maxStamina;
-        onPlayerStaggerDisable.Raise(this, null);
-        canRecoverStamina = true;
-        canStaggerPlayer = true;
-        isRunning_PlayerStaggerCounter = false;
     }
 }

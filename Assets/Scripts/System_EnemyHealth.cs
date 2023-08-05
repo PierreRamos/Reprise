@@ -26,8 +26,6 @@ public class System_EnemyHealth : MonoBehaviour
 
     private string healthThreshold = "";
 
-    private bool healthIsEmpty;
-
     private void Start()
     {
         healthValue = maxHealth;
@@ -48,7 +46,6 @@ public class System_EnemyHealth : MonoBehaviour
         else if (healthValue + value < 0)
         {
             healthValue = 0;
-            healthIsEmpty = true;
             DEBUG_onGameEnd.Raise(this, null);
         }
         else
@@ -66,16 +63,12 @@ public class System_EnemyHealth : MonoBehaviour
             healthThreshold = "25";
             onEnemyHealthThresholdChange.Raise(this, healthThreshold);
         }
-        else if (
-            healthValue <= maxHealth * 0.50 && !healthThreshold.Equals("50")
-        )
+        else if (healthValue <= maxHealth * 0.50 && !healthThreshold.Equals("50"))
         {
             healthThreshold = "50";
             onEnemyHealthThresholdChange.Raise(this, healthThreshold);
         }
-        else if (
-            healthValue <= maxHealth * 0.75 && !healthThreshold.Equals("75")
-        )
+        else if (healthValue <= maxHealth * 0.75 && !healthThreshold.Equals("75"))
         {
             healthThreshold = "75";
             onEnemyHealthThresholdChange.Raise(this, healthThreshold);

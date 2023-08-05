@@ -37,8 +37,6 @@ public class System_EnemyStamina : MonoBehaviour
 
     private bool canRecoverStamina = true;
 
-    private bool canStaggerPlayer = true;
-
     private bool isRunning_StartStaminaRecoveryTimer;
 
     private bool isRunning_PlayerStaggerCounter;
@@ -60,10 +58,7 @@ public class System_EnemyStamina : MonoBehaviour
         //Stamina Recovery System
         if (enemyIsIdle && canRecoverStamina && staminaValue < maxStamina)
         {
-            if (
-                staminaValue + (staminaRecoveryRate * Time.deltaTime) >
-                maxStamina
-            )
+            if (staminaValue + (staminaRecoveryRate * Time.deltaTime) > maxStamina)
             {
                 staminaValue = maxStamina;
             }
@@ -109,10 +104,9 @@ public class System_EnemyStamina : MonoBehaviour
         perfectParryStreak++;
         if (isRunning_PerfectParryStreakResetTimer)
         {
-            StopCoroutine (current_PerfectParryStreakResetTimer);
+            StopCoroutine(current_PerfectParryStreakResetTimer);
         }
-        current_PerfectParryStreakResetTimer =
-            StartCoroutine(PerfectParryStreakResetTimer());
+        current_PerfectParryStreakResetTimer = StartCoroutine(PerfectParryStreakResetTimer());
     }
 
     //Resets parry streak when player misses a perfect parry or gets damaged
@@ -124,7 +118,7 @@ public class System_EnemyStamina : MonoBehaviour
     //Checks what should be the stamina regen rate based on enemy health
     public void UpdateStaminaRecoveryRate(Component sender, object data)
     {
-        float health = (float) data;
+        float health = (float)data;
         if (health < (maxHealth * 0.25))
         {
             staminaRecoveryRate = staminaRecoveryRateBase * 0.01f;
@@ -146,7 +140,7 @@ public class System_EnemyStamina : MonoBehaviour
     //Sets enemyIsIdle called by System_Enemy
     public void SetEnemyIsIdle(Component sender, object data)
     {
-        enemyIsIdle = (bool) data;
+        enemyIsIdle = (bool)data;
     }
 
     //Perfect parry streak timer before it resets
@@ -163,10 +157,9 @@ public class System_EnemyStamina : MonoBehaviour
     {
         if (isRunning_StartStaminaRecoveryTimer)
         {
-            StopCoroutine (current_StartStaminaRecoveryTimer);
+            StopCoroutine(current_StartStaminaRecoveryTimer);
         }
-        current_StartStaminaRecoveryTimer =
-            StartCoroutine(StaminaRecoveryTimer());
+        current_StartStaminaRecoveryTimer = StartCoroutine(StaminaRecoveryTimer());
         canRecoverStamina = false;
     }
 
