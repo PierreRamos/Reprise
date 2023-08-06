@@ -28,9 +28,6 @@ public class System_PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameEvent onPlayerUpdateVelocity;
 
-    [SerializeField]
-    private GameEvent onPlayerPushbackFinish;
-
     private float horizontal;
 
     private bool onParryHoldSpeed;
@@ -103,6 +100,12 @@ public class System_PlayerMovement : MonoBehaviour
 
     //Pushes the player back by amount force (Does not stop player movement)
 
+    [SerializeField]
+    private GameEvent onPlayerPushbackStart;
+
+    [SerializeField]
+    private GameEvent onPlayerPushbackFinish;
+
     private bool isPushedBack;
 
     private bool isRunning_PlayerPushBack;
@@ -112,6 +115,7 @@ public class System_PlayerMovement : MonoBehaviour
     public void PlayerPushBack(float pushBackForce)
     {
         isPushedBack = true;
+        onPlayerPushbackStart.Raise(this, null);
         Vector3 temp = rb.velocity;
         temp.x = 0f;
         rb.velocity = temp;
@@ -120,9 +124,9 @@ public class System_PlayerMovement : MonoBehaviour
         {
             StopCoroutine(current_PlayerPushBack);
         }
-        current_PlayerPushBack = StartCoroutine(Timer());
+        current_PlayerPushBack = StartCoroutine(Condition());
 
-        IEnumerator Timer()
+        IEnumerator Condition()
         {
             isRunning_PlayerPushBack = true;
             yield return new WaitUntil(() => rb.velocity.x != 0f);

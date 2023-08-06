@@ -5,13 +5,52 @@ using UnityEngine;
 public class System_PlayerAnimation : MonoBehaviour
 {
     [SerializeField]
+    private float dashGhostEffectDelay;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private GameObject ghostEffect;
+
     private float horizontalVelocity;
+
+    private float elapsedDashGhostEffectDelay;
+
+    private bool ghostIsActive;
+
+    private void Start()
+    {
+        elapsedDashGhostEffectDelay = dashGhostEffectDelay;
+    }
 
     private void Update()
     {
         animator.SetFloat("HorizontalVelocity", horizontalVelocity);
+
+        //Spawns ghost effect whenever player is dashing
+        if (ghostIsActive)
+        {
+            if (elapsedDashGhostEffectDelay > 0)
+            {
+                elapsedDashGhostEffectDelay -= Time.deltaTime;
+            }
+            else
+            {
+                Sprite currentSprite = spriteRenderer.sprite;
+                GameObject currentGhostEffect = Instantiate(
+                    ghostEffect,
+                    transform.position,
+                    transform.rotation
+                );
+                currentGhostEffect.GetComponent<SpriteRenderer>().sprite = currentSprite;
+                Destroy(currentGhostEffect, 0.5f);
+                elapsedDashGhostEffectDelay = dashGhostEffectDelay;
+            }
+        }
     }
 
     //Trigger player hit animation except when player is stunned
@@ -44,6 +83,11 @@ public class System_PlayerAnimation : MonoBehaviour
     public void TriggerDashStartAnimation()
     {
         animator.SetTrigger("PlayerDashStart");
+    }
+
+    public void SetGhostIsActive(bool isActive)
+    {
+        ghostIsActive = isActive;
     }
 
     public void TriggerPlayerCastShoot()

@@ -86,9 +86,10 @@ public class System_Enemy : MonoBehaviour
 
     public void ExecuteAttackString(Component sender, object data)
     {
-        List<Attack> attackList = ((AttackString) data).attackString;
-        current_ExecuteAttackStringCoroutine =
-            StartCoroutine(ExecuteAttackStringCoroutine(attackList));
+        List<Attack> attackList = ((AttackString)data).attackString;
+        current_ExecuteAttackStringCoroutine = StartCoroutine(
+            ExecuteAttackStringCoroutine(attackList)
+        );
     }
 
     IEnumerator ExecuteAttackStringCoroutine(List<Attack> attackList)
@@ -128,27 +129,27 @@ public class System_Enemy : MonoBehaviour
 
         if (healthThreshold.Equals("100"))
         {
-            current_IdleWindowTimer =
-                StartCoroutine(IdleWindowTimer(Random
-                    .Range(minIdleTime, maxIdleTime)));
+            current_IdleWindowTimer = StartCoroutine(
+                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime))
+            );
         }
         else if (healthThreshold.Equals("75"))
         {
-            current_IdleWindowTimer =
-                StartCoroutine(IdleWindowTimer(Random
-                    .Range(minIdleTime, maxIdleTime * 0.66f)));
+            current_IdleWindowTimer = StartCoroutine(
+                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime * 0.66f))
+            );
         }
         else if (healthThreshold.Equals("50"))
         {
-            current_IdleWindowTimer =
-                StartCoroutine(IdleWindowTimer(Random
-                    .Range(minIdleTime, maxIdleTime * 0.33f)));
+            current_IdleWindowTimer = StartCoroutine(
+                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime * 0.33f))
+            );
         }
         else if (healthThreshold.Equals("25"))
         {
-            current_IdleWindowTimer =
-                StartCoroutine(IdleWindowTimer(Random
-                    .Range(minIdleTime, maxIdleTime * 0.01f)));
+            current_IdleWindowTimer = StartCoroutine(
+                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime * 0.01f))
+            );
         }
     } //
 
@@ -161,23 +162,19 @@ public class System_Enemy : MonoBehaviour
         isActivelyParrying = true;
         if (healthThreshold.Equals("100"))
         {
-            StartCoroutine(AfterActiveTimer(Random
-                .Range(0, maxAfterActiveAttackDelay)));
+            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay)));
         }
         if (healthThreshold.Equals("75"))
         {
-            StartCoroutine(AfterActiveTimer(Random
-                .Range(0, maxAfterActiveAttackDelay * 0.66f)));
+            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay * 0.66f)));
         }
         if (healthThreshold.Equals("50"))
         {
-            StartCoroutine(AfterActiveTimer(Random
-                .Range(0, maxAfterActiveAttackDelay * 0.33f)));
+            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay * 0.33f)));
         }
         if (healthThreshold.Equals("25"))
         {
-            StartCoroutine(AfterActiveTimer(Random
-                .Range(0, maxAfterActiveAttackDelay * 0.01f)));
+            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay * 0.01f)));
         }
     } //
 
@@ -201,10 +198,10 @@ public class System_Enemy : MonoBehaviour
         {
             hitCount++;
             int chanceNumber = 80 * hitCount;
-            int randomNumber = (int) Random.Range(0, 100f);
+            int randomNumber = (int)Random.Range(0, 100f);
             if (chanceNumber > randomNumber)
             {
-                StopCoroutine (current_IdleWindowTimer);
+                StopCoroutine(current_IdleWindowTimer);
                 ActiveWindow();
             }
         }
@@ -213,7 +210,7 @@ public class System_Enemy : MonoBehaviour
     //Stun enemy when called by OnPlayerEmpoweredBulletEnterEnemy
     public void StartStunEnemy(Component sender, object data)
     {
-        float stunTime = (float) data;
+        float stunTime = (float)data;
         enemyIsStunned = true;
         onEnemyStunned.Raise(this, enemyIsStunned);
         StopAllCoroutines();
@@ -222,10 +219,18 @@ public class System_Enemy : MonoBehaviour
         StartCoroutine(StunEnemyTimer(stunTime));
     }
 
+    //Interrupts enemy and halts all coroutines
+    public void InterruptEnemy()
+    {
+        StopAllCoroutines();
+        isActivelyParrying = false;
+        isExecutingAttackString = false;
+    }
+
     //Sets enemy health threshold
     public void SetHealthThreshold(Component sender, object data)
     {
-        string threshold = (string) data;
+        string threshold = (string)data;
         healthThreshold = threshold;
     }
 

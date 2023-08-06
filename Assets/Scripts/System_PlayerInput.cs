@@ -85,7 +85,7 @@ public class System_PlayerInput : MonoBehaviour
     //Player dash input (tap)
     public void PlayerDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isPerformed_PlayerBlockInput)
+        if (context.performed && !isPerformed_PlayerBlockInput && !disableInput && !disableMovement)
         {
             onPlayerDashInput.Raise(this, null);
         }
@@ -155,10 +155,24 @@ public class System_PlayerInput : MonoBehaviour
 
     private bool disableInput;
 
+    private bool playerIsBeingPushedBack;
+
+    //Sets to true whenever player is being pushed back and false when push back is over
+    public void SetPlayerPushBack(bool isBeingPushedBack)
+    {
+        playerIsBeingPushedBack = isBeingPushedBack;
+    }
+
+    //Set PlayerIsStunned
+    public void SetPlayerIsStunned(bool value)
+    {
+        playerIsStunned = value;
+    }
+
     //Enables player input
     public void EnableInput(Component sender, object data)
     {
-        if (playerIsStunned == false)
+        if (playerIsStunned == false && playerIsBeingPushedBack == false)
         {
             disableInput = false;
         }
@@ -200,7 +214,7 @@ public class System_PlayerInput : MonoBehaviour
         {
             isRunning_DisableInputTimer = true;
             yield return new WaitForSeconds(time);
-            if (playerIsStunned == false)
+            if (playerIsStunned == false && playerIsBeingPushedBack == false)
             {
                 disableInput = false;
             }
@@ -213,7 +227,10 @@ public class System_PlayerInput : MonoBehaviour
     //Enables player movement
     public void EnableMovement()
     {
-        disableMovement = false;
+        if (playerIsBeingPushedBack == false)
+        {
+            disableMovement = false;
+        }
     }
 
     //Disables player movement and needs to be enabled
@@ -248,14 +265,11 @@ public class System_PlayerInput : MonoBehaviour
         {
             isRunning_DisableMovementTimer = true;
             yield return new WaitForSeconds(time);
-            disableMovement = false;
+            if (playerIsBeingPushedBack == false)
+            {
+                disableMovement = false;
+            }
             isRunning_DisableMovementTimer = false;
         }
-    }
-
-    //Set PlayerIsStunned
-    public void SetPlayerIsStunned(bool value)
-    {
-        playerIsStunned = value;
     }
 }

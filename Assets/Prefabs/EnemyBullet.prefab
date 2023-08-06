@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -3461400073200764626}
   - component: {fileID: -1498992725519954111}
   - component: {fileID: -5980202640038902072}
+  - component: {fileID: -366055961349148129}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Bullet
@@ -348,6 +349,34 @@ MonoBehaviour:
       - m_Target: {fileID: 7142035547894693230}
         m_TargetAssemblyTypeName: System_EnemyBullet, Assembly-CSharp
         m_MethodName: SetBulletDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-366055961349148129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307313126725175151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1235b35cd92dd0940ba7ca3f94908533, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7142035547894693230}
+        m_TargetAssemblyTypeName: System_EnemyBullet, Assembly-CSharp
+        m_MethodName: DestroyBullet
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

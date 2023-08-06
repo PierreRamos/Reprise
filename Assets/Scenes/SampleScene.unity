@@ -1189,15 +1189,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.15116279
+    x: 0
     y: 0
-    width: 0.6976744
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 4.21875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3263,6 +3263,7 @@ MonoBehaviour:
   onPlayerDash: {fileID: 11400000, guid: 62af2a170e0a04049b3a09cb11b92524, type: 2}
   onPlayerDashFinish: {fileID: 11400000, guid: f705965e7110001469563ecb545fbf72, type: 2}
   onPlayerUpdateVelocity: {fileID: 11400000, guid: 3265720ab1fabe348b5e306fc606cf3f, type: 2}
+  onPlayerPushbackStart: {fileID: 11400000, guid: 49a4ae18e16151a49add634102773356, type: 2}
   onPlayerPushbackFinish: {fileID: 11400000, guid: 5e9e3edea84e3794ebc4e57328608656, type: 2}
 --- !u!114 &1138985494
 MonoBehaviour:
@@ -3867,6 +3868,7 @@ GameObject:
   - component: {fileID: 1444462114}
   - component: {fileID: 1444462113}
   - component: {fileID: 1444462115}
+  - component: {fileID: 1444462116}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -4337,6 +4339,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1444462116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444462097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1235b35cd92dd0940ba7ca3f94908533, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1444462102}
+        m_TargetAssemblyTypeName: System_Enemy, Assembly-CSharp
+        m_MethodName: InterruptEnemy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1492187784
 GameObject:
   m_ObjectHideFlags: 0
@@ -4499,6 +4529,8 @@ GameObject:
   - component: {fileID: 1543280007}
   - component: {fileID: 1543280009}
   - component: {fileID: 1543280008}
+  - component: {fileID: 1543280010}
+  - component: {fileID: 1543280011}
   m_Layer: 3
   m_Name: PlayerAnimations
   m_TagString: Untagged
@@ -4661,6 +4693,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1543280004}
+        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
+        m_MethodName: SetGhostIsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1543279998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4801,6 +4845,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1543280004}
+        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
+        m_MethodName: SetGhostIsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1543280003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4841,7 +4897,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b66c41be9f68cd4e96f3e021dbe574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashGhostEffectDelay: 0.05
+  spriteRenderer: {fileID: 1813599410}
   animator: {fileID: 1813599421}
+  ghostEffect: {fileID: 2401774057850904280, guid: e55932d8d7b4e10409f876c909f37275, type: 3}
 --- !u!114 &1543280006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4953,6 +5012,62 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1543280010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543279991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: f705965e7110001469563ecb545fbf72, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1543280004}
+        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
+        m_MethodName: SetGhostIsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1543280011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543279991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 5e9e3edea84e3794ebc4e57328608656, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1543280004}
+        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
+        m_MethodName: SetGhostIsActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1544767982
 GameObject:
@@ -5817,6 +5932,7 @@ GameObject:
   - component: {fileID: 1813599448}
   - component: {fileID: 1813599451}
   - component: {fileID: 1813599452}
+  - component: {fileID: 1813599455}
   - component: {fileID: 1813599454}
   m_Layer: 3
   m_Name: Player
@@ -5880,7 +5996,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 703383532, guid: a78c60da7ded0784c81cff0bda1d9b1f, type: 3}
-  m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
+  m_Color: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6423,6 +6539,18 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: DisableInput
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 1813599432}
         m_TargetAssemblyTypeName: System_PlayerShoot, Assembly-CSharp
         m_MethodName: PlayerShootPenalties
@@ -6747,6 +6875,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1813599416}
         m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: SetPlayerPushBack
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
         m_MethodName: EnableInput
         m_Mode: 0
         m_Arguments:
@@ -6756,6 +6896,34 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1813599455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813599407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 49a4ae18e16151a49add634102773356, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1813599416}
+        m_TargetAssemblyTypeName: System_PlayerInput, Assembly-CSharp
+        m_MethodName: SetPlayerPushBack
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1814868278
 GameObject:
