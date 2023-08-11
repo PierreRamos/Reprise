@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - EmpoweredBullet
   - DeflectedBullet
+  - UnblockableAttack
   layers:
   - Default
   - TransparentFX

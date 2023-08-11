@@ -11,6 +11,9 @@ public class System_BulletCounterTime : MonoBehaviour
     private GameEvent onConfirmParryHit;
 
     [SerializeField]
+    private GameEvent onUnblockableReversal;
+
+    [SerializeField]
     private float parryWindowStart;
 
     [SerializeField]
@@ -18,9 +21,11 @@ public class System_BulletCounterTime : MonoBehaviour
 
     private float currentTime;
 
-    private bool canParry;
+    private bool isBlockable;
 
     private bool canPerfectParry;
+
+    private bool playerIsDashing;
 
     public bool parryIsHeld { private get; set; }
 
@@ -34,7 +39,7 @@ public class System_BulletCounterTime : MonoBehaviour
         currentTime += 1 * Time.deltaTime;
         if (currentTime > parryWindowStart)
         {
-            canParry = true;
+            isBlockable = true;
             if (currentTime > perfectParryWindowStart)
             {
                 canPerfectParry = true;
@@ -42,23 +47,42 @@ public class System_BulletCounterTime : MonoBehaviour
         }
         else
         {
-            canParry = false;
+            isBlockable = false;
         }
-        if (parryIsHeld)
+        if (parryIsHeld || playerIsDashing)
         {
             ConfirmParryHit(this, transform.position);
         }
     }
 
+    //Gets called when player dashes and when it finishes
+    public void PlayerIsDashing(bool isDashing)
+    {
+        playerIsDashing = isDashing;
+    }
+
+    //Gets called when player inputs parry
     public void ConfirmParryHit(Component sender, object data)
     {
-        if (canParry && canPerfectParry)
+        //If attack is blockable
+        if (gameObject.CompareTag("Bullet"))
         {
-            onConfirmPerfectParryHit.Raise(this, transform.position);
+            if (isBlockable && canPerfectParry)
+            {
+                onConfirmPerfectParryHit.Raise(this, transform.position);
+            }
+            else if (isBlockable)
+            {
+                onConfirmParryHit.Raise(this, transform.position);
+            }
         }
-        else if (canParry)
+        //If attack is unblockable
+        else if (gameObject.CompareTag("UnblockableAttack"))
         {
-            onConfirmParryHit.Raise(this, transform.position);
+            if (playerIsDashing == true && isBlockable)
+            {
+                onUnblockableReversal.Raise(this, null);
+            }
         }
     }
 }

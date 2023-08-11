@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 72313552a75bee045b48564a8db6b3b5
+guid: 7fc6e40e0f26e5e4d826fd96141ceb0c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character-Idle 1_0
+      name: Character-Reversal_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f09b17b4f9d0919478d944cfefe33e70
-      internalID: -351472943
+      spriteID: 03da44f42374851449fc9e931b5e47b9
+      internalID: -1382513209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Idle 1_1
+      name: Character-Reversal_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18ff4ef98cc8f9740a7aaea50e5f0cbd
-      internalID: 397322189
+      spriteID: a1a33fc02a08a9b4fb8617649b1b65af
+      internalID: -1299676550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Idle 1_2
+      name: Character-Reversal_2
       rect:
         serializedVersion: 2
         x: 96
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f0c9a33d8c093c41ac20374bba59e9b
-      internalID: -561127099
+      spriteID: a7cd01b3fdf7e1947ac34d6f90a8c32c
+      internalID: -1252405665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Idle 1_3
+      name: Character-Reversal_3
       rect:
         serializedVersion: 2
         x: 144
@@ -194,8 +194,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b1471263ba32ab4cb96dc9ce60ba754
-      internalID: -367420140
+      spriteID: 78eb9cf3464b81d4995d497aa2063230
+      internalID: -246916600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Reversal_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68e760efe5a8ce64688ad4491e18729a
+      internalID: 157039679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Reversal_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1a9388dd3b8ec84fb2e5ba752df8a37
+      internalID: -1368509590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Reversal_6
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b97934b2624cb86428989483e9427347
+      internalID: -2044840987
       vertices: []
       indices: 
       edges: []
@@ -211,10 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Idle 1_3: -367420140
-      Character-Idle 1_1: 397322189
-      Character-Idle 1_0: -351472943
-      Character-Idle 1_2: -561127099
+      Character-Reversal_6: -2044840987
+      Character-Reversal_4: 157039679
+      Character-Reversal_1: -1299676550
+      Character-Reversal_3: -246916600
+      Character-Reversal_5: -1368509590
+      Character-Reversal_2: -1252405665
+      Character-Reversal_0: -1382513209
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

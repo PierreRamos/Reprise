@@ -17,7 +17,13 @@ public class System_Enemy : MonoBehaviour
     private GameObject bullet;
 
     [SerializeField]
+    private GameObject unblockableAttack;
+
+    [SerializeField]
     private GameEvent onEnemyCastShootBullet;
+
+    [SerializeField]
+    private GameEvent onEnemyCastUnblockableAttack;
 
     [SerializeField]
     private GameEvent onEnemyBulletSpawn;
@@ -41,6 +47,9 @@ public class System_Enemy : MonoBehaviour
     private GameEvent onEnemyFinishString;
 
     [SerializeField]
+    private GameEvent onEnemyShootUnblockable;
+
+    [SerializeField]
     private float castTime;
 
     //Increments if enemy is hit during idle time
@@ -49,9 +58,7 @@ public class System_Enemy : MonoBehaviour
     //Temporary damage holder
     private float bulletDamage;
 
-    //Holds current enemy health so can dictate whether is more aggressive relative to health
-    private float enemyHealth;
-
+    //Holds current enemy health threshold so can dictate whether is more aggressive relative to health
     private string healthThreshold = "100";
 
     private bool canShoot;
@@ -65,8 +72,6 @@ public class System_Enemy : MonoBehaviour
     private bool isExecutingAttackString;
 
     private Coroutine current_IdleWindowTimer;
-
-    private Coroutine current_ExecuteAttackStringCoroutine;
 
     private void Start()
     {
@@ -87,38 +92,64 @@ public class System_Enemy : MonoBehaviour
     public void ExecuteAttackString(Component sender, object data)
     {
         List<Attack> attackList = ((AttackString)data).attackString;
-        current_ExecuteAttackStringCoroutine = StartCoroutine(
-            ExecuteAttackStringCoroutine(attackList)
-        );
+        StartCoroutine(ExecuteAttackStringCoroutine(attackList));
     }
 
     IEnumerator ExecuteAttackStringCoroutine(List<Attack> attackList)
     {
         isExecutingAttackString = true;
         canShoot = false;
-
-        // float hitCastTimeAdjustment = (0.5f - 0.3f);
         PlayCastingAnimation();
         yield return new WaitForSeconds(0.25f);
         isActivelyParrying = false;
+
+        //For loop cycles through attacks in attack list
         for (int i = 0; i < attackList.Count; i++)
         {
             bulletDamage = attackList[i].damage * -1;
-            float placeholder = 0;
             float timingDelay = attackList[i].timingDelay;
-            float temp = timingDelay - 0.3f;
-            if (temp < 0 && i != 0)
-            {
-                placeholder = temp;
-            }
-
-            //Prototype
             yield return new WaitForSeconds(timingDelay); //0 initially
-            ShootBullet();
+            if (attackList[i].isUnblockable == true)
+            {
+                onEnemyCastUnblockableAttack.Raise(this, null);
+                PlayCastingAnimation(); //temporary
+                yield return new WaitForSeconds(0.5f);
+                ShootUnblockableBullet();
+            }
+            else
+            {
+                ShootBullet();
+            }
         }
         StartCoroutine(AfterAttackStringDelay());
         onEnemyFinishString.Raise(this, null);
         isExecutingAttackString = false;
+
+        //Internal methods
+        void PlayCastingAnimation()
+        {
+            onEnemyCastShootBullet.Raise(this, null);
+        }
+
+        void ShootBullet()
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+            onEnemyBulletSpawn.Raise(this, bulletDamage);
+        }
+
+        void ShootUnblockableBullet()
+        {
+            onEnemyShootUnblockable.Raise(this, null);
+            Instantiate(unblockableAttack, transform.position, transform.rotation);
+            onEnemyBulletSpawn.Raise(this, bulletDamage);
+        }
+
+        //Delay after enemy finishes attack string
+        IEnumerator AfterAttackStringDelay()
+        {
+            yield return new WaitForSeconds(0.3f);
+            IdleWindow();
+        }
     }
 
     //Method which starts the time window where enemy is idle and is not actively parrying
@@ -151,7 +182,15 @@ public class System_Enemy : MonoBehaviour
                 IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime * 0.01f))
             );
         }
-    } //
+
+        //Internal methods
+        //Timer which tells how long idle window is
+        IEnumerator IdleWindowTimer(float value)
+        {
+            yield return new WaitForSeconds(value);
+            ActiveWindow();
+        }
+    }
 
     //Method which starts the time window where enemy is idle but is actively parrying
     private void ActiveWindow()
@@ -176,7 +215,15 @@ public class System_Enemy : MonoBehaviour
         {
             StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay * 0.01f)));
         }
-    } //
+
+        //Internal methods
+        //Starts a short timer which dictates when the enemy will start an attack string
+        IEnumerator AfterActiveTimer(float value)
+        {
+            yield return new WaitForSeconds(value);
+            canShoot = true;
+        }
+    }
 
     //Method which checks if enemy will parry player bullet or not; Gets called by OnPlayerBulletHitEnemy
     public void CheckIfEnemyWillParry(Component sender, object data)
@@ -189,7 +236,7 @@ public class System_Enemy : MonoBehaviour
         {
             onConfirmPlayerBulletHitEnemy.Raise(this, null);
         }
-    } //
+    }
 
     //Is called everytime the enemy is hit by player bullet and has a chance to stop the idle time
     public void EnemyHitCheck()
@@ -217,6 +264,15 @@ public class System_Enemy : MonoBehaviour
         isActivelyParrying = false;
         isExecutingAttackString = false;
         StartCoroutine(StunEnemyTimer(stunTime));
+
+        //Internal methods
+        IEnumerator StunEnemyTimer(float time)
+        {
+            yield return new WaitForSeconds(time);
+            enemyIsStunned = false;
+            onEnemyStunned.Raise(this, enemyIsStunned);
+            ActiveWindow();
+        }
     }
 
     //Interrupts enemy and halts all coroutines
@@ -232,45 +288,5 @@ public class System_Enemy : MonoBehaviour
     {
         string threshold = (string)data;
         healthThreshold = threshold;
-    }
-
-    IEnumerator StunEnemyTimer(float time)
-    {
-        yield return new WaitForSeconds(time);
-        enemyIsStunned = false;
-        onEnemyStunned.Raise(this, enemyIsStunned);
-        ActiveWindow();
-    }
-
-    //Delay after enemy finishes attack string
-    IEnumerator AfterAttackStringDelay()
-    {
-        yield return new WaitForSeconds(0.3f);
-        IdleWindow();
-    }
-
-    //Timer which tells how long idle window is
-    IEnumerator IdleWindowTimer(float value)
-    {
-        yield return new WaitForSeconds(value);
-        ActiveWindow();
-    }
-
-    //Starts a short timer which dictates when the enemy will start an attack string
-    IEnumerator AfterActiveTimer(float value)
-    {
-        yield return new WaitForSeconds(value);
-        canShoot = true;
-    }
-
-    private void PlayCastingAnimation()
-    {
-        onEnemyCastShootBullet.Raise(this, null);
-    }
-
-    private void ShootBullet()
-    {
-        Instantiate(bullet, transform.position, transform.rotation);
-        onEnemyBulletSpawn.Raise(this, bulletDamage);
     }
 }

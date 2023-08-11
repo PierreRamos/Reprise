@@ -10,6 +10,9 @@ public class System_PlayerAnimationEvents : MonoBehaviour
     [SerializeField]
     private GameEvent onPlayerUseHealthPotionConfirm;
 
+    [SerializeField]
+    private GameEvent onPlayerReversalConfirm;
+
     public void PlayerConsumableFinish()
     {
         onPlayerConsumableFinish.Raise(this, null);
@@ -18,5 +21,10 @@ public class System_PlayerAnimationEvents : MonoBehaviour
     public void PlayerUseHealthPotionConfirm()
     {
         onPlayerUseHealthPotionConfirm.Raise(this, null);
+    }
+
+    public void PlayerReversalConfirm()
+    {
+        onPlayerReversalConfirm.Raise(this, null);
     }
 }

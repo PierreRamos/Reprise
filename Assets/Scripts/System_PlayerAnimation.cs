@@ -112,6 +112,11 @@ public class System_PlayerAnimation : MonoBehaviour
         animator.SetTrigger($"PlayerDeflected{randomNumber}");
     }
 
+    public void TriggerPlayerReversal()
+    {
+        animator.SetTrigger("PlayerReversal");
+    }
+
     public void SetPlayerIsBlocking(bool value)
     {
         animator.SetBool("PlayerIsBlocking", value);

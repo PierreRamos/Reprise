@@ -84,6 +84,12 @@ public class System_PlayerShoot : MonoBehaviour
         }
     }
 
+    //Spawns player reversal attack projectile (Reversal Animation)
+    public void PlayerReversalBullet()
+    {
+        Instantiate(empoweredBullet, shootPoint.position, bullet.transform.rotation);
+    }
+
     //Called by OnSpecialMeterIsFull Game event which sets the special meter is full bool
     public void SetSpecialMeterIsFull(Component sender, object data)
     {

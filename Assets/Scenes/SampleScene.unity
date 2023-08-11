@@ -1983,7 +1983,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725310554}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 838daa7c4f860184fa0c04cb8029060d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3992,7 +3992,9 @@ MonoBehaviour:
   maxIdleTime: 5
   maxAfterActiveAttackDelay: 1
   bullet: {fileID: 1307313126725175151, guid: 2e2ffd6e614b6c543ace6d2755a36f85, type: 3}
+  unblockableAttack: {fileID: 1307313126725175151, guid: 1934b3ff96a3cec428a96ebc13b0c6c1, type: 3}
   onEnemyCastShootBullet: {fileID: 11400000, guid: 1811e0415682c32488918aeac797b4de, type: 2}
+  onEnemyCastUnblockableAttack: {fileID: 11400000, guid: 00ef7c0a06a3d274ea3db36e6ccc24c1, type: 2}
   onEnemyBulletSpawn: {fileID: 11400000, guid: e2a320ae3cdfb624aae1c7abb7c6e267, type: 2}
   onEnemyCanShoot: {fileID: 11400000, guid: d783e46abbb4490479010ea0505f0dda, type: 2}
   onEnemyParryPlayerBullet: {fileID: 11400000, guid: ee46b6682fb57bc4493a271631e5f5dc, type: 2}
@@ -4000,6 +4002,7 @@ MonoBehaviour:
   onEnemyStunned: {fileID: 11400000, guid: a3736197f52f4d141a02e8445336e8a7, type: 2}
   onEnemyUpdateStatus: {fileID: 11400000, guid: 5c600137bf901e04c959ce7017df4e0e, type: 2}
   onEnemyFinishString: {fileID: 11400000, guid: 967df7a22bd3eff4c9ea326a9c040b62, type: 2}
+  onEnemyShootUnblockable: {fileID: 11400000, guid: 467a3651028a523419a2c12d3fc8ea74, type: 2}
   castTime: 0.3
 --- !u!114 &1444462103
 MonoBehaviour:
@@ -4531,6 +4534,7 @@ GameObject:
   - component: {fileID: 1543280008}
   - component: {fileID: 1543280010}
   - component: {fileID: 1543280011}
+  - component: {fileID: 1543280012}
   m_Layer: 3
   m_Name: PlayerAnimations
   m_TagString: Untagged
@@ -5061,6 +5065,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
         m_MethodName: SetGhostIsActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1543280012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543279991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 82f008e19c136bc48bf7ac82a300ac25, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1543280004}
+        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
+        m_MethodName: TriggerPlayerReversal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5934,6 +5966,7 @@ GameObject:
   - component: {fileID: 1813599452}
   - component: {fileID: 1813599455}
   - component: {fileID: 1813599454}
+  - component: {fileID: 1813599456}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -5995,12 +6028,12 @@ SpriteRenderer:
   m_SortingLayerID: 1525374025
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 703383532, guid: a78c60da7ded0784c81cff0bda1d9b1f, type: 3}
+  m_Sprite: {fileID: -351472943, guid: 72313552a75bee045b48564a8db6b3b5, type: 3}
   m_Color: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -6773,6 +6806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerConsumableFinish: {fileID: 11400000, guid: f9ddab1a48cd1e8448f462cbeca751bb, type: 2}
   onPlayerUseHealthPotionConfirm: {fileID: 11400000, guid: cb958a3f757a2404c8811557abcbc52e, type: 2}
+  onPlayerReversalConfirm: {fileID: 11400000, guid: d42655af8220ea24cb4650c8c476ecf9, type: 2}
 --- !u!114 &1813599451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6925,6 +6959,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1813599456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813599407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: d42655af8220ea24cb4650c8c476ecf9, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1813599432}
+        m_TargetAssemblyTypeName: System_PlayerShoot, Assembly-CSharp
+        m_MethodName: PlayerReversalBullet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1814868278
 GameObject:
   m_ObjectHideFlags: 0
@@ -6950,7 +7012,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814868278}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 838daa7c4f860184fa0c04cb8029060d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

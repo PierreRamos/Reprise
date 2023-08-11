@@ -8,4 +8,6 @@ public class Attack : ScriptableObject
     public float damage;
 
     public float timingDelay;
+
+    public bool isUnblockable;
 }
