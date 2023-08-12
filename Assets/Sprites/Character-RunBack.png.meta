@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c91ed307c4524941a1739d662075c9e
+guid: d9679735f653f8b4d9bc2e11e750c58a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 982bd1b54a8870f448cbe4aa46e56382
-      internalID: -997511903
+      spriteID: c341cac49940d7945ba76a10675c76c0
+      internalID: 765889826
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5288714ff95962849bd1a2a47a6e045e
-      internalID: 767780340
+      spriteID: 8a86ca2b25e39b748b156a07761d953d
+      internalID: 127836613
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb39b33a70599d246921727e1f4cbe72
-      internalID: -1968966002
+      spriteID: f1a4fd612e121674eb9c92b8dfcdfae6
+      internalID: 1667397978
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b924d9e310538e44873300b5fe4df99
-      internalID: -1993809069
+      spriteID: 2f1f3d1740a63854491eca2cfc65e808
+      internalID: -185910219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-RunBack_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f556a93e6f330bb47965a88b95e5c6f6
+      internalID: -1435399001
       vertices: []
       indices: 
       edges: []
@@ -211,10 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-RunBack_2: -1968966002
-      Character-RunBack_0: -997511903
-      Character-RunBack_1: 767780340
-      Character-RunBack_3: -1993809069
+      Character-RunBack_2: 1667397978
+      Character-RunBack_4: -1435399001
+      Character-RunBack_0: 765889826
+      Character-RunBack_1: 127836613
+      Character-RunBack_3: -185910219
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

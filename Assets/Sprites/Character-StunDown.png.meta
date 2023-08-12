@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e831be0f75ccd354e9b389aa97b728fc
+guid: e9bf7b664eb82514e84366475747c996
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character-Block_1_0
+      name: Character-StunDown_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ece3d86183be3f45b37718443c0ffd3
-      internalID: -1056201908
+      spriteID: 265407a7cd4be7f419564bfe82e1d1a8
+      internalID: -945412645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Block_1_1
+      name: Character-StunDown_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d185fa085e8eaf747a181f6d51071192
-      internalID: -1868924710
+      spriteID: 4ffb306a56989164f94a8f2932c8a07a
+      internalID: 1991890121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Block_1_2
+      name: Character-StunDown_2
       rect:
         serializedVersion: 2
         x: 96
@@ -173,8 +173,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55c5b4430dfaa7247af0f61081c27e65
-      internalID: 1353341754
+      spriteID: 078652bd54e259546b472989e154915c
+      internalID: 1519141125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-StunDown_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2bc0d5231a183842b6719a7a7a9ddfc
+      internalID: -1162688275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-StunDown_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4abca24cd522ffb42a4455971b034340
+      internalID: 1001118298
       vertices: []
       indices: 
       edges: []
@@ -190,9 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Block_1_1: -1868924710
-      Character-Block_1_0: -1056201908
-      Character-Block_1_2: 1353341754
+      Character-StunDown_0: -945412645
+      Character-StunDown_3: -1162688275
+      Character-StunDown_4: 1001118298
+      Character-StunDown_2: 1519141125
+      Character-StunDown_1: 1991890121
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

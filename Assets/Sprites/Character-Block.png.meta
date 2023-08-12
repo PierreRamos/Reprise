@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f515857f57c444d4d8bc3a48c7f31d52
+guid: e831be0f75ccd354e9b389aa97b728fc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character-Heal_0
+      name: Character-Block_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64475a0c0a8f0fe41a1cc8c397780d0f
-      internalID: 310162034
+      spriteID: dc1a7c647d6f6e344bdacd95e154904d
+      internalID: 1431571060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Heal_1
+      name: Character-Block_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9927166dabcadfe40999b66c3b2a6688
-      internalID: -669411916
+      spriteID: 4c19610102166f142b8fee7ea91a1efb
+      internalID: -386569628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Heal_2
+      name: Character-Block_2
       rect:
         serializedVersion: 2
         x: 96
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23e50b197d156bc489aab06472200b89
-      internalID: 1916877706
+      spriteID: 310bf426efe36274988eb1b05d1ea559
+      internalID: -499463143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Heal_3
+      name: Character-Block_3
       rect:
         serializedVersion: 2
         x: 144
@@ -194,134 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 566444fd4159d504882a9f08c0020d6c
-      internalID: 1637191017
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Heal_4
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3cba058627ff6b14facce039dfbfb15b
-      internalID: -287963685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Heal_5
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80ca132ba060c0c43ab6d8df1141f175
-      internalID: -1637372908
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Heal_6
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a790c8caaf95a1a4484062f29f88e701
-      internalID: -1824047291
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Heal_7
-      rect:
-        serializedVersion: 2
-        x: 336
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c00ef6ea2fa7e8947a69157de7710a76
-      internalID: 1927866499
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Heal_8
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7e98e91cb11cfb4695f8cd571b36f7d
-      internalID: 772612956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Heal_9
-      rect:
-        serializedVersion: 2
-        x: 432
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d72598c815483249843b301214307cb
-      internalID: -1573049158
+      spriteID: b4edfeb81aeed2a47ac32f382799716b
+      internalID: -639951345
       vertices: []
       indices: 
       edges: []
@@ -337,16 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Heal_6: -1824047291
-      Character-Heal_1: -669411916
-      Character-Heal_7: 1927866499
-      Character-Heal_5: -1637372908
-      Character-Heal_8: 772612956
-      Character-Heal_0: 310162034
-      Character-Heal_2: 1916877706
-      Character-Heal_9: -1573049158
-      Character-Heal_4: -287963685
-      Character-Heal_3: 1637191017
+      Character-Block_1: -386569628
+      Character-Block_3: -639951345
+      Character-Block_0: 1431571060
+      Character-Block_2: -499463143
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c4203e4a29df3cf41b82124eddb06545
+guid: 0af1721025e20964ea013e8600d4bab0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a312a467109ac4f4f87fd97a761101b4
-      internalID: -855288545
+      spriteID: 758411324e9c3d449b7a619ea532b804
+      internalID: 1789155304
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87877b31902f07745b8170ce7863e9a5
-      internalID: -1396467889
+      spriteID: 3f161971c1453dd4f9a3d4e5201439bb
+      internalID: 273769490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Dash_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf970aacb7965f646941a7c71c15511a
+      internalID: 1043508472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Dash_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ec901cc02dd454384e40ba7cfd3a65
+      internalID: -865819939
       vertices: []
       indices: 
       edges: []
@@ -169,8 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Dash_0: -855288545
-      Character-Dash_1: -1396467889
+      Character-Dash_0: 1789155304
+      Character-Dash_2: 1043508472
+      Character-Dash_3: -865819939
+      Character-Dash_1: 273769490
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

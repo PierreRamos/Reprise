@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e3ab0e25d3890e8419e33c1c9c6f6006
+guid: 14bd83372c8278f44abfaf63a0511ae3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character-Guard_0
+      name: Character-Guard 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b14034b3522dfcf4ea3ba7700358718e
-      internalID: 580163932
+      spriteID: e314b5332dbe65244ae301fe9cc59e40
+      internalID: 460864265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Guard_1
+      name: Character-Guard 1_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,8 +152,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3c6da6139fed5441b29867594edaa50
-      internalID: 1857431390
+      spriteID: b56123f431f08604ca014dd944ec12d0
+      internalID: 964986420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Guard 1_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b6fc0446cda8fe479b1b472374235b3
+      internalID: 593086933
       vertices: []
       indices: 
       edges: []
@@ -169,8 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Guard_0: 580163932
-      Character-Guard_1: 1857431390
+      Character-Guard 1_1: 964986420
+      Character-Guard 1_0: 460864265
+      Character-Guard 1_2: 593086933
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

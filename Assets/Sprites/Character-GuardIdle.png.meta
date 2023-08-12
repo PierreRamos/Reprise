@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 490ec062bf4bcd744a5df099f194505b
+guid: cad168b3bcb72ac448c25417e39ad480
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character-Stun 1_0
+      name: Character-GuardIdle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0db53e41a2099b42a4f8ff744ddd12c
-      internalID: 981844581
+      spriteID: 813b265762bb58a41be8332cd66dae4a
+      internalID: -2145556954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Stun 1_1
+      name: Character-GuardIdle_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f44a75e3db591ee44b920829f7f7cabf
-      internalID: 962281237
+      spriteID: fe4d53e55153c7a41991fa370b1d5fe0
+      internalID: -1960388909
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Stun 1_2
+      name: Character-GuardIdle_2
       rect:
         serializedVersion: 2
         x: 96
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49f6ba740a89c5845a219efdf39683d3
-      internalID: 975022338
+      spriteID: e2ec204e64c8fc64784414b1bb9744a5
+      internalID: 1625905744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Stun 1_3
+      name: Character-GuardIdle_3
       rect:
         serializedVersion: 2
         x: 144
@@ -194,8 +194,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6f1309c539d34b4a8bd73901391a1b2
-      internalID: -2100435319
+      spriteID: 0be94a23d14a914408b996f4af200307
+      internalID: 303006991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-GuardIdle_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2c83133fe0860840ad89c992ada2136
+      internalID: -1338080574
       vertices: []
       indices: 
       edges: []
@@ -211,10 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Stun 1_0: 981844581
-      Character-Stun 1_3: -2100435319
-      Character-Stun 1_2: 975022338
-      Character-Stun 1_1: 962281237
+      Character-GuardIdle_0: -2145556954
+      Character-GuardIdle_2: 1625905744
+      Character-GuardIdle_4: -1338080574
+      Character-GuardIdle_3: 303006991
+      Character-GuardIdle_1: -1960388909
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c9d3e651a60c5384fba15b2276e70182
+guid: 10488c5c12b40364ebfa8eaabc9daee8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character-Run_0
+      name: Character-Run 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a02c7a6870b94e4c94f5b4aeffe4c70
-      internalID: -1549612165
+      spriteID: 2de9d8edeb2e59c4bb0aca80e1801f69
+      internalID: 55288877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Run_1
+      name: Character-Run 1_1
       rect:
         serializedVersion: 2
         x: 48
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 176b433ffed977448b1fb7f15a163ebb
-      internalID: -270717361
+      spriteID: 3e2d7752df0d1994a8ad290d0a2ab4a4
+      internalID: 2135522168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Run_2
+      name: Character-Run 1_2
       rect:
         serializedVersion: 2
         x: 96
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40adbae6d88774e47a5f320d5928c5b8
-      internalID: -2133985329
+      spriteID: 48916594339f9be498254bd7878dd7a0
+      internalID: -1095086894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Run_3
+      name: Character-Run 1_3
       rect:
         serializedVersion: 2
         x: 144
@@ -194,8 +194,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cc921a1fdd9c60478bb44a5366d5d4f
-      internalID: -393127503
+      spriteID: a4863e3e2b4d2284e859f7fa9d7e414e
+      internalID: -2132616705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Run 1_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c969b72317d9746bb39024d190c01f
+      internalID: -1467151637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Run 1_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35083c8caf1bfe469ee0cc4a4e06de1
+      internalID: -924745551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Run 1_6
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bde32f6cf3398e646a0cae20f1aa35ff
+      internalID: 953322449
       vertices: []
       indices: 
       edges: []
@@ -211,10 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Run_3: -393127503
-      Character-Run_1: -270717361
-      Character-Run_2: -2133985329
-      Character-Run_0: -1549612165
+      Character-Run 1_4: -1467151637
+      Character-Run 1_1: 2135522168
+      Character-Run 1_2: -1095086894
+      Character-Run 1_6: 953322449
+      Character-Run 1_5: -924745551
+      Character-Run 1_0: 55288877
+      Character-Run 1_3: -2132616705
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

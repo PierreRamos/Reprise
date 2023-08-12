@@ -98,6 +98,8 @@ public class System_PlayerMovement : MonoBehaviour
         }
     }
 
+    //Bug: trigger dash finish when dashing stops
+
     //Pushes the player back by amount force (Does not stop player movement)
 
     [SerializeField]

@@ -82,7 +82,13 @@ public class System_PlayerAnimation : MonoBehaviour
 
     public void TriggerDashStartAnimation()
     {
+        animator.ResetTrigger("PlayerDashFinish");
         animator.SetTrigger("PlayerDashStart");
+    }
+
+    public void TriggerDashFinishAnimation()
+    {
+        animator.SetTrigger("PlayerDashFinish");
     }
 
     public void SetGhostIsActive(bool isActive)
@@ -102,8 +108,7 @@ public class System_PlayerAnimation : MonoBehaviour
 
     public void TriggerPlayerBlocked()
     {
-        int randomNumber = Random.Range(1, 3);
-        animator.SetTrigger($"PlayerBlocked{randomNumber}");
+        animator.SetTrigger("PlayerBlocked");
     }
 
     public void TriggerPlayerDeflected()
@@ -129,6 +134,11 @@ public class System_PlayerAnimation : MonoBehaviour
     }
 
     private bool playerIsStunned;
+
+    public void TriggerPlayerStun()
+    {
+        animator.SetTrigger("PlayerStun");
+    }
 
     public void SetPlayerIsStunned(bool value)
     {

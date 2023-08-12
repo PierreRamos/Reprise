@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a2eb0a64bb47cab4795a75fc98026935
+guid: 79dc2e5d81c916b4aa85a92b18fe711b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 242eab0d9dc71ea46a269b46788910a4
-      internalID: 1671987594
+      spriteID: 0bdee43b16a19bd4ca89b49d045e7bf8
+      internalID: -1827887235
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704021bd70ee55042b9006e3bce948ec
-      internalID: -580489267
+      spriteID: 76b1f13823fe47049a51637056ddbf7a
+      internalID: 593785929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-DashBack_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38c992a5f1d049d4593910d92820d2de
+      internalID: -939092757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-DashBack_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2534f73a91a822b4e83e2483dd732c5e
+      internalID: -1151319400
       vertices: []
       indices: 
       edges: []
@@ -169,8 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-DashBack_0: 1671987594
-      Character-DashBack_1: -580489267
+      Character-DashBack_0: -1827887235
+      Character-DashBack_2: -939092757
+      Character-DashBack_1: 593785929
+      Character-DashBack_3: -1151319400
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

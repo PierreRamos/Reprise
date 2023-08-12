@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4f671fc1070d62c48a3818c1ab8d9a34
+guid: e497d36c7be08da4daef860d6014ea3c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f9648a2f2c6890438a3c505759a0ab2
-      internalID: 122398471
+      spriteID: 8ebf8b4058623994bb1f2ea55ed9afd1
+      internalID: 2064191055
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f49cea868eed58348b9dad17b645da15
-      internalID: 1197003136
+      spriteID: 9ad3142fca9556240bd6de433963a589
+      internalID: 1212376642
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c0546bc2dd83cc4f8381bd05f1b5a4a
-      internalID: 1776810833
+      spriteID: f2e3f4aa452e1a04a905db7e4ab9288e
+      internalID: -778591431
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef94dbe46fff98343b8f2549733f3f32
-      internalID: -996515408
+      spriteID: 56ebdd7690cb84c4d95806d47a6b41d4
+      internalID: -211618506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Stun_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7267cd4092793774da53e03e3e5db20f
+      internalID: -1046937672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Stun_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a6ebd62717240a489be935175ffddce
+      internalID: 1386738495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character-Stun_6
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c6d0f06ec142f41a4be39e28f2c659
+      internalID: -1992200708
       vertices: []
       indices: 
       edges: []
@@ -211,10 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Stun_2: 1776810833
-      Character-Stun_0: 122398471
-      Character-Stun_1: 1197003136
-      Character-Stun_3: -996515408
+      Character-Stun_2: -778591431
+      Character-Stun_0: 2064191055
+      Character-Stun_1: 1212376642
+      Character-Stun_6: -1992200708
+      Character-Stun_3: -211618506
+      Character-Stun_4: -1046937672
+      Character-Stun_5: 1386738495
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

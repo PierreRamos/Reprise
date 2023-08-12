@@ -3258,7 +3258,7 @@ MonoBehaviour:
   rb: {fileID: 1813599441}
   speed: 200
   parryHoldMovementSpeed: 0
-  dashForce: 5
+  dashForce: 3
   onPlayerPositionRequest: {fileID: 11400000, guid: 5cdcad91059874842a362cc37e6dc2c2, type: 2}
   onPlayerDash: {fileID: 11400000, guid: 62af2a170e0a04049b3a09cb11b92524, type: 2}
   onPlayerDashFinish: {fileID: 11400000, guid: f705965e7110001469563ecb545fbf72, type: 2}
@@ -5007,6 +5007,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1543280004}
         m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
+        m_MethodName: TriggerPlayerStun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1543280004}
+        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
         m_MethodName: SetPlayerIsStunned
         m_Mode: 6
         m_Arguments:
@@ -5033,6 +5045,18 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1543280004}
+        m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
+        m_MethodName: TriggerDashFinishAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1543280004}
         m_TargetAssemblyTypeName: System_PlayerAnimation, Assembly-CSharp
         m_MethodName: SetGhostIsActive
