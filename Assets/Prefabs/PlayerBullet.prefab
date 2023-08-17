@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 8
-  maxBulletVelocity: 50
+  maxBulletVelocity: 45
   empoweredBulletStunTime: 0
   onPlayerBulletEnterEnemy: {fileID: 11400000, guid: b3ae33fe5ad040a45a49038e16f3a4f6, type: 2}
   onPlayerEmpoweredBulletEnterEnemy: {fileID: 11400000, guid: 94814e30f2553f140bf6be15f70080d7, type: 2}

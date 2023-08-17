@@ -58,8 +58,7 @@ public class System_PlayerAnimation : MonoBehaviour
     {
         if (playerIsStunned == false)
         {
-            int randomNumber = Random.Range(1, 3);
-            animator.SetTrigger($"PlayerHit{randomNumber}");
+            animator.SetTrigger("PlayerHit");
         }
     }
 
@@ -113,8 +112,7 @@ public class System_PlayerAnimation : MonoBehaviour
 
     public void TriggerPlayerDeflected()
     {
-        int randomNumber = Random.Range(1, 3);
-        animator.SetTrigger($"PlayerDeflected{randomNumber}");
+        animator.SetTrigger("PlayerDeflect");
     }
 
     public void TriggerPlayerReversal()

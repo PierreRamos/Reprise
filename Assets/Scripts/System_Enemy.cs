@@ -41,6 +41,12 @@ public class System_Enemy : MonoBehaviour
     private GameEvent onEnemyStunned;
 
     [SerializeField]
+    private GameEvent onEnemyCanParry;
+
+    [SerializeField]
+    private GameEvent onEnemyCannotParry;
+
+    [SerializeField]
     private GameEvent onEnemyUpdateStatus;
 
     [SerializeField]
@@ -101,6 +107,7 @@ public class System_Enemy : MonoBehaviour
         canShoot = false;
         PlayCastingAnimation();
         yield return new WaitForSeconds(0.25f);
+        onEnemyCannotParry.Raise(this, null);
         isActivelyParrying = false;
 
         //For loop cycles through attacks in attack list
@@ -195,26 +202,31 @@ public class System_Enemy : MonoBehaviour
     //Method which starts the time window where enemy is idle but is actively parrying
     private void ActiveWindow()
     {
+        float time = 0;
+        if (healthThreshold.Equals("100"))
+        {
+            time = Random.Range(0, maxAfterActiveAttackDelay);
+        }
+        else if (healthThreshold.Equals("75"))
+        {
+            time = Random.Range(0, maxAfterActiveAttackDelay * 0.66f);
+        }
+        else if (healthThreshold.Equals("50"))
+        {
+            time = Random.Range(0, maxAfterActiveAttackDelay * 0.33f);
+        }
+        else if (healthThreshold.Equals("25"))
+        {
+            time = Random.Range(0, maxAfterActiveAttackDelay * 0.01f);
+        }
+
         hitCount = 0;
         isInIdle = false;
         onEnemyUpdateStatus.Raise(this, isInIdle);
+        onEnemyCanParry.Raise(this, null);
         isActivelyParrying = true;
-        if (healthThreshold.Equals("100"))
-        {
-            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay)));
-        }
-        if (healthThreshold.Equals("75"))
-        {
-            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay * 0.66f)));
-        }
-        if (healthThreshold.Equals("50"))
-        {
-            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay * 0.33f)));
-        }
-        if (healthThreshold.Equals("25"))
-        {
-            StartCoroutine(AfterActiveTimer(Random.Range(0, maxAfterActiveAttackDelay * 0.01f)));
-        }
+
+        StartCoroutine(AfterActiveTimer(time));
 
         //Internal methods
         //Starts a short timer which dictates when the enemy will start an attack string
@@ -260,9 +272,7 @@ public class System_Enemy : MonoBehaviour
         float stunTime = (float)data;
         enemyIsStunned = true;
         onEnemyStunned.Raise(this, enemyIsStunned);
-        StopAllCoroutines();
-        isActivelyParrying = false;
-        isExecutingAttackString = false;
+        InterruptEnemy();
         StartCoroutine(StunEnemyTimer(stunTime));
 
         //Internal methods
@@ -279,6 +289,7 @@ public class System_Enemy : MonoBehaviour
     public void InterruptEnemy()
     {
         StopAllCoroutines();
+        onEnemyCannotParry.Raise(this, null);
         isActivelyParrying = false;
         isExecutingAttackString = false;
     }

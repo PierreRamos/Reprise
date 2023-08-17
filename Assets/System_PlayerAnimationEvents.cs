@@ -13,6 +13,12 @@ public class System_PlayerAnimationEvents : MonoBehaviour
     [SerializeField]
     private GameEvent onPlayerReversalConfirm;
 
+    [SerializeField]
+    private GameEvent onPlayerShootConfirm;
+
+    [SerializeField]
+    private GameEvent onPlayerShootEmpoweredConfirm;
+
     public void PlayerConsumableFinish()
     {
         onPlayerConsumableFinish.Raise(this, null);
@@ -21,6 +27,16 @@ public class System_PlayerAnimationEvents : MonoBehaviour
     public void PlayerUseHealthPotionConfirm()
     {
         onPlayerUseHealthPotionConfirm.Raise(this, null);
+    }
+
+    public void PlayerShootBulletConfirm()
+    {
+        onPlayerShootConfirm.Raise(this, null);
+    }
+
+    public void PlayerShootEmpoweredConfirm()
+    {
+        onPlayerShootEmpoweredConfirm.Raise(this, null);
     }
 
     public void PlayerReversalConfirm()

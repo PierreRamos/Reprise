@@ -20,7 +20,10 @@ public class System_PlayerShoot : MonoBehaviour
     private GameObject empoweredBullet;
 
     [SerializeField]
-    private Transform shootPoint;
+    private Transform shootPointNormal;
+
+    [SerializeField]
+    private Transform shootPointEmpowered;
 
     [SerializeField]
     private GameEvent onPlayerShootBullet;
@@ -50,44 +53,38 @@ public class System_PlayerShoot : MonoBehaviour
     {
         if (enable_PlayerShoot)
         {
-            StartCoroutine(PlayerShootCast());
-        }
-
-        //Spawn player bullet after cast time and checks if special meter is full
-        IEnumerator PlayerShootCast()
-        {
             enable_PlayerShoot = false;
 
             //If special meter is full or not, decides which cast time to do
             if (isFull_SpecialMeter)
             {
                 onPlayerShootEmpoweredBulletCast.Raise(this, null);
-                yield return new WaitForSecondsRealtime(1.25f);
             }
             else
             {
                 onPlayerShootBulletCast.Raise(this, null);
-                yield return new WaitForSeconds(playerShootCastTime);
-            }
-
-            //Check if special meter is full and decides which bullet to spawn
-            if (isFull_SpecialMeter)
-            {
-                onPlayerShootEmpoweredBullet.Raise(this, null);
-                Instantiate(empoweredBullet, shootPoint.position, bullet.transform.rotation);
-            }
-            else
-            {
-                Instantiate(bullet, shootPoint.position, bullet.transform.rotation);
-                onPlayerShootBullet.Raise(this, null);
             }
         }
+    }
+
+    //Instantiates player bullet
+    public void PlayerBullet()
+    {
+        Instantiate(bullet, shootPointNormal.position, bullet.transform.rotation);
+        onPlayerShootBullet.Raise(this, null);
+    }
+
+    //Instantiates player empowered bullet
+    public void PlayerEmpoweredBullet()
+    {
+        onPlayerShootEmpoweredBullet.Raise(this, null);
+        Instantiate(empoweredBullet, shootPointEmpowered.position, bullet.transform.rotation);
     }
 
     //Spawns player reversal attack projectile (Reversal Animation)
     public void PlayerReversalBullet()
     {
-        Instantiate(empoweredBullet, shootPoint.position, bullet.transform.rotation);
+        Instantiate(bullet, shootPointNormal.position, bullet.transform.rotation);
     }
 
     //Called by OnSpecialMeterIsFull Game event which sets the special meter is full bool
@@ -95,6 +92,8 @@ public class System_PlayerShoot : MonoBehaviour
     {
         isFull_SpecialMeter = (bool)data;
     }
+
+    private bool isRunning_PlayerShootCooldown;
 
     //Gets called when player shot bullet event
     public void PlayerShootPenalties()
@@ -105,8 +104,10 @@ public class System_PlayerShoot : MonoBehaviour
         //Timer before player can shoot again
         IEnumerator PlayerShootCooldown(float time)
         {
+            isRunning_PlayerShootCooldown = true;
             yield return new WaitForSeconds(time);
             enable_PlayerShoot = true;
+            isRunning_PlayerShootCooldown = false;
         }
 
         //Delays player movement when player shoots
@@ -114,6 +115,14 @@ public class System_PlayerShoot : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
             onPlayerShootMovementCooldownFinish.Raise(this, null);
+        }
+    }
+
+    public void PlayerShootInterrupted()
+    {
+        if (isRunning_PlayerShootCooldown == false)
+        {
+            enable_PlayerShoot = true;
         }
     }
 }

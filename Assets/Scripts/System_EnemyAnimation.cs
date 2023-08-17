@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class System_EnemyAnimation : MonoBehaviour
 {
+    [SerializeField]
     private Animator animator;
 
-    private void Awake()
+    private bool canParry;
+
+    private bool projectileIsPresent;
+
+    private bool isParryPrepped;
+
+    private void Update()
     {
-        animator = GetComponent<Animator>();
+        if (projectileIsPresent && !isParryPrepped)
+        {
+            TriggerParryPrep();
+        }
     }
 
     public void TriggerEnemyCast()
@@ -21,9 +31,35 @@ public class System_EnemyAnimation : MonoBehaviour
         animator.SetTrigger("EnemyHit");
     }
 
+    public void TriggerParryPrep()
+    {
+        if (canParry)
+        {
+            animator.SetTrigger("ParryPrep");
+            isParryPrepped = true;
+        }
+    }
+
+    public void TriggerParry()
+    {
+        animator.ResetTrigger("ParryPrep");
+        animator.SetTrigger("Parry");
+        isParryPrepped = false;
+    }
+
     public void SetEnemyStun(Component sender, object data)
     {
-        bool isStunned = (bool) data;
+        bool isStunned = (bool)data;
         animator.SetBool("EnemyStunned", isStunned);
+    }
+
+    public void SetCanParry(bool parry)
+    {
+        canParry = parry;
+    }
+
+    public void SetProjectileIsPresent(bool isPresent)
+    {
+        projectileIsPresent = isPresent;
     }
 }
