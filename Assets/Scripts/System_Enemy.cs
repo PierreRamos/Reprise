@@ -17,7 +17,16 @@ public class System_Enemy : MonoBehaviour
     private GameObject bullet;
 
     [SerializeField]
+    private Transform shootPoint1;
+
+    [SerializeField]
+    private Transform shootPoint2;
+
+    [SerializeField]
     private GameObject unblockableAttack;
+
+    [SerializeField]
+    private GameEvent startString;
 
     [SerializeField]
     private GameEvent onEnemyCastShootBullet;
@@ -90,73 +99,39 @@ public class System_Enemy : MonoBehaviour
         {
             if (!isExecutingAttackString)
             {
-                onEnemyCanShoot.Raise(this, null);
+                startString.Raise(this, null);
+                isActivelyParrying = false;
+                isExecutingAttackString = true;
+                canShoot = false;
+                onEnemyCannotParry.Raise(this, null);
+                // onEnemyCanShoot.Raise(this, null); //temporary
             }
         }
     }
 
-    public void ExecuteAttackString(Component sender, object data)
+    //Ends attack string, gets called via animation events
+    public void EndAttackString()
     {
-        List<Attack> attackList = ((AttackString)data).attackString;
-        StartCoroutine(ExecuteAttackStringCoroutine(attackList));
+        if (isExecutingAttackString)
+        {
+            isExecutingAttackString = false;
+        }
+        IdleWindow();
     }
 
-    IEnumerator ExecuteAttackStringCoroutine(List<Attack> attackList)
+    //Shoots enemy bullet, gets called by via animation events
+    public void EnemyShoot(Component sender, object shootPoint)
     {
-        isExecutingAttackString = true;
-        canShoot = false;
-        PlayCastingAnimation();
-        yield return new WaitForSeconds(0.25f);
-        onEnemyCannotParry.Raise(this, null);
-        isActivelyParrying = false;
-
-        //For loop cycles through attacks in attack list
-        for (int i = 0; i < attackList.Count; i++)
+        int point = (int)shootPoint;
+        if (point == 1)
         {
-            bulletDamage = attackList[i].damage * -1;
-            float timingDelay = attackList[i].timingDelay;
-            yield return new WaitForSeconds(timingDelay); //0 initially
-            if (attackList[i].isUnblockable == true)
-            {
-                onEnemyCastUnblockableAttack.Raise(this, null);
-                PlayCastingAnimation(); //temporary
-                yield return new WaitForSeconds(0.5f);
-                ShootUnblockableBullet();
-            }
-            else
-            {
-                ShootBullet();
-            }
+            Instantiate(bullet, shootPoint1.position, transform.rotation);
         }
-        StartCoroutine(AfterAttackStringDelay());
-        onEnemyFinishString.Raise(this, null);
-        isExecutingAttackString = false;
-
-        //Internal methods
-        void PlayCastingAnimation()
+        else if (point == 2)
         {
-            onEnemyCastShootBullet.Raise(this, null);
+            Instantiate(bullet, shootPoint2.position, transform.rotation);
         }
-
-        void ShootBullet()
-        {
-            Instantiate(bullet, transform.position, transform.rotation);
-            onEnemyBulletSpawn.Raise(this, bulletDamage);
-        }
-
-        void ShootUnblockableBullet()
-        {
-            onEnemyShootUnblockable.Raise(this, null);
-            Instantiate(unblockableAttack, transform.position, transform.rotation);
-            onEnemyBulletSpawn.Raise(this, bulletDamage);
-        }
-
-        //Delay after enemy finishes attack string
-        IEnumerator AfterAttackStringDelay()
-        {
-            yield return new WaitForSeconds(0.3f);
-            IdleWindow();
-        }
+        onEnemyBulletSpawn.Raise(this, bulletDamage);
     }
 
     //Method which starts the time window where enemy is idle and is not actively parrying
@@ -300,4 +275,69 @@ public class System_Enemy : MonoBehaviour
         string threshold = (string)data;
         healthThreshold = threshold;
     }
+
+    // //Temporarily turned off
+    // public void ExecuteAttackString(Component sender, object data)
+    // {
+    //     List<Attack> attackList = ((AttackString)data).attackString;
+    //     StartCoroutine(ExecuteAttackStringCoroutine(attackList));
+    // }
+
+    // IEnumerator ExecuteAttackStringCoroutine(List<Attack> attackList)
+    // {
+    //     isExecutingAttackString = true;
+    //     canShoot = false;
+    //     PlayCastingAnimation();
+    //     yield return new WaitForSeconds(0.25f);
+    //     onEnemyCannotParry.Raise(this, null);
+    //     isActivelyParrying = false;
+
+    //     //For loop cycles through attacks in attack list
+    //     for (int i = 0; i < attackList.Count; i++)
+    //     {
+    //         bulletDamage = attackList[i].damage * -1;
+    //         float timingDelay = attackList[i].timingDelay;
+    //         yield return new WaitForSeconds(timingDelay); //0 initially
+    //         if (attackList[i].isUnblockable == true)
+    //         {
+    //             onEnemyCastUnblockableAttack.Raise(this, null);
+    //             PlayCastingAnimation(); //temporary
+    //             yield return new WaitForSeconds(0.5f);
+    //             ShootUnblockableBullet();
+    //         }
+    //         else
+    //         {
+    //             ShootBullet();
+    //         }
+    //     }
+    //     StartCoroutine(AfterAttackStringDelay());
+    //     onEnemyFinishString.Raise(this, null);
+    //     isExecutingAttackString = false;
+
+    //     //Internal methods
+    //     void PlayCastingAnimation()
+    //     {
+    //         onEnemyCastShootBullet.Raise(this, null);
+    //     }
+
+    //     void ShootBullet()
+    //     {
+    //         Instantiate(bullet, transform.position, transform.rotation);
+    //         onEnemyBulletSpawn.Raise(this, bulletDamage);
+    //     }
+
+    //     void ShootUnblockableBullet()
+    //     {
+    //         onEnemyShootUnblockable.Raise(this, null);
+    //         Instantiate(unblockableAttack, transform.position, transform.rotation);
+    //         onEnemyBulletSpawn.Raise(this, bulletDamage);
+    //     }
+
+    //     //Delay after enemy finishes attack string
+    //     IEnumerator AfterAttackStringDelay()
+    //     {
+    //         yield return new WaitForSeconds(0.3f);
+    //         IdleWindow();
+    //     }
+    // }
 }

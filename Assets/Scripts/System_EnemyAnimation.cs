@@ -35,6 +35,7 @@ public class System_EnemyAnimation : MonoBehaviour
     {
         if (canParry)
         {
+            animator.ResetTrigger("Parry");
             animator.SetTrigger("ParryPrep");
             isParryPrepped = true;
         }
@@ -45,6 +46,11 @@ public class System_EnemyAnimation : MonoBehaviour
         animator.ResetTrigger("ParryPrep");
         animator.SetTrigger("Parry");
         isParryPrepped = false;
+    }
+
+    public void TriggerAttackString()
+    {
+        animator.SetTrigger("StartString1");
     }
 
     public void SetEnemyStun(Component sender, object data)
