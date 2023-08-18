@@ -144,8 +144,12 @@ public class System_Enemy : MonoBehaviour
 
     private bool isRunning_IdleWindowTimer;
 
+    private bool isIdle;
+
     private void IdleWindow()
     {
+        isIdle = true;
+        isActive = false;
         float time = 0;
 
         if (healthThreshold.Equals("100"))
@@ -172,8 +176,10 @@ public class System_Enemy : MonoBehaviour
         IEnumerator IdleWindowTimer(float value)
         {
             isRunning_IdleWindowTimer = true;
+            print(value);
             yield return new WaitForSeconds(value);
             ActiveWindow();
+            print("from IWT");
             isRunning_IdleWindowTimer = false;
         }
     }
@@ -184,8 +190,12 @@ public class System_Enemy : MonoBehaviour
 
     private bool isRunning_AfterActiveTimer;
 
+    private bool isActive;
+
     private void ActiveWindow()
     {
+        isIdle = false;
+        isActive = true;
         float time = 0;
         if (healthThreshold.Equals("100"))
         {
@@ -221,7 +231,6 @@ public class System_Enemy : MonoBehaviour
             yield return new WaitForSeconds(value);
             canShoot = true;
             isRunning_AfterActiveTimer = false;
-            print("from AAT");
         }
     }
 
@@ -244,17 +253,16 @@ public class System_Enemy : MonoBehaviour
         if (!enemyIsStunned && !isExecutingAttackString)
         {
             hitCount++;
-            int chanceNumber = 50 * hitCount;
+            int chanceNumber = 75 * hitCount;
             int randomNumber = (int)Random.Range(0, 100f);
             if (chanceNumber > randomNumber)
             {
-                if (isRunning_AfterActiveTimer)
+                if (isActive)
                 {
                     StopCoroutine(current_AfterActiveTimer);
                     canShoot = true;
-                    print("from EHC");
                 }
-                else if (isRunning_IdleWindowTimer)
+                else if (isIdle)
                 {
                     StopCoroutine(current_IdleWindowTimer);
                     ActiveWindow();
