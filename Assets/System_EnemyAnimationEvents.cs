@@ -10,9 +10,17 @@ public class System_EnemyAnimationEvents : MonoBehaviour
     [SerializeField]
     private GameEvent onEnemyEndAttackString;
 
+    [SerializeField]
+    private GameEvent onEnemyEndParry;
+
     public void EnemyShootConfirm(int shootPoint)
     {
         onEnemyShootConfirm.Raise(this, shootPoint);
+    }
+
+    public void EnemyEndParry()
+    {
+        onEnemyEndParry.Raise(this, null);
     }
 
     public void EnemyEndAttackString()

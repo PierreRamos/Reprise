@@ -33,8 +33,6 @@ public class System_EnemyStamina : MonoBehaviour
 
     private int perfectParryStreak;
 
-    private bool enemyIsIdle;
-
     private bool canRecoverStamina = true;
 
     private bool isRunning_StartStaminaRecoveryTimer;
@@ -56,7 +54,7 @@ public class System_EnemyStamina : MonoBehaviour
     private void Update()
     {
         //Stamina Recovery System
-        if (enemyIsIdle && canRecoverStamina && staminaValue < maxStamina)
+        if (!isCurrentlyAttacking && canRecoverStamina && staminaValue < maxStamina)
         {
             if (staminaValue + (staminaRecoveryRate * Time.deltaTime) > maxStamina)
             {
@@ -137,10 +135,17 @@ public class System_EnemyStamina : MonoBehaviour
         }
     }
 
-    //Sets enemyIsIdle called by System_Enemy
-    public void SetEnemyIsIdle(Component sender, object data)
+    //Checks whether enemy is attacking and halts stamina regeneration
+
+    private bool isCurrentlyAttacking;
+
+    public void SetIsCurrentlyAttacking(bool state)
     {
-        enemyIsIdle = (bool)data;
+        if (state == false)
+        {
+            StartStaminaRecoveryTimer();
+        }
+        isCurrentlyAttacking = state;
     }
 
     //Perfect parry streak timer before it resets
@@ -161,17 +166,17 @@ public class System_EnemyStamina : MonoBehaviour
         }
         current_StartStaminaRecoveryTimer = StartCoroutine(StaminaRecoveryTimer());
         canRecoverStamina = false;
-    }
 
-    //Starts a delay counter before stamina can recover after stamina is decreased
-    IEnumerator StaminaRecoveryTimer()
-    {
-        isRunning_StartStaminaRecoveryTimer = true;
-        yield return new WaitForSeconds(staminaRecoveryDelay);
-        if (!isRunning_PlayerStaggerCounter)
+        //Starts a delay counter before stamina can recover after stamina is decreased
+        IEnumerator StaminaRecoveryTimer()
         {
-            canRecoverStamina = true;
+            isRunning_StartStaminaRecoveryTimer = true;
+            yield return new WaitForSeconds(staminaRecoveryDelay);
+            if (!isRunning_PlayerStaggerCounter)
+            {
+                canRecoverStamina = true;
+            }
+            isRunning_StartStaminaRecoveryTimer = false;
         }
-        isRunning_StartStaminaRecoveryTimer = false;
     }
 }

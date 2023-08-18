@@ -28,20 +28,20 @@ public class System_PlayerHealth : MonoBehaviour
         onHealthUpdateUI.Raise(this, healthValue);
     }
 
-    public void UpdateHealthValue(Component sender, object data)
+    public void UpdateHealthValue(float value)
     {
-        if (healthValue + (float)data > maxHealth)
+        if (healthValue + value > maxHealth)
         {
             healthValue = maxHealth;
         }
-        else if (healthValue + (float)data < 0)
+        else if (healthValue + value < 0)
         {
             healthValue = 0;
             DEBUG_onGameEnd.Raise(this, null);
         }
         else
         {
-            healthValue += (float)data;
+            healthValue += value;
         }
         onHealthValueChange.Raise(this, healthValue);
     }

@@ -80,8 +80,6 @@ public class System_Enemy : MonoBehaviour
 
     private bool isActivelyParrying;
 
-    private bool isInIdle = true;
-
     private bool enemyIsStunned;
 
     private bool isExecutingAttackString;
@@ -93,16 +91,18 @@ public class System_Enemy : MonoBehaviour
         IdleWindow();
     }
 
+    private bool isCurrentlyParrying;
+
     private void Update()
     {
         if (canShoot && !enemyIsStunned)
         {
-            if (!isExecutingAttackString)
+            if (!isExecutingAttackString && !isCurrentlyParrying)
             {
-                startString.Raise(this, null);
-                isActivelyParrying = false;
-                isExecutingAttackString = true;
                 canShoot = false;
+                isExecutingAttackString = true;
+                isActivelyParrying = false;
+                startString.Raise(this, null);
                 onEnemyCannotParry.Raise(this, null);
                 // onEnemyCanShoot.Raise(this, null); //temporary
             }
@@ -134,81 +134,94 @@ public class System_Enemy : MonoBehaviour
         onEnemyBulletSpawn.Raise(this, bulletDamage);
     }
 
+    //Sets whether enemy is preparing to parry or not, condition whether can start attack string
+    public void SetIsCurrentlyParrying(bool state)
+    {
+        isCurrentlyParrying = state;
+    }
+
     //Method which starts the time window where enemy is idle and is not actively parrying
+
+    private bool isRunning_IdleWindowTimer;
+
     private void IdleWindow()
     {
-        isInIdle = true;
-        onEnemyUpdateStatus.Raise(this, isInIdle);
+        float time = 0;
 
         if (healthThreshold.Equals("100"))
         {
-            current_IdleWindowTimer = StartCoroutine(
-                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime))
-            );
+            time = Random.Range(minIdleTime, maxIdleTime);
         }
         else if (healthThreshold.Equals("75"))
         {
-            current_IdleWindowTimer = StartCoroutine(
-                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime * 0.66f))
-            );
+            time = Random.Range(minIdleTime * 0.9f, maxIdleTime * 0.9f);
         }
         else if (healthThreshold.Equals("50"))
         {
-            current_IdleWindowTimer = StartCoroutine(
-                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime * 0.33f))
-            );
+            time = Random.Range(minIdleTime * 0.8f, maxIdleTime * 0.8f);
         }
         else if (healthThreshold.Equals("25"))
         {
-            current_IdleWindowTimer = StartCoroutine(
-                IdleWindowTimer(Random.Range(minIdleTime, maxIdleTime * 0.01f))
-            );
+            time = Random.Range(minIdleTime * 0.7f, maxIdleTime * 0.7f);
         }
+
+        current_IdleWindowTimer = StartCoroutine(IdleWindowTimer(time));
 
         //Internal methods
         //Timer which tells how long idle window is
         IEnumerator IdleWindowTimer(float value)
         {
+            isRunning_IdleWindowTimer = true;
             yield return new WaitForSeconds(value);
             ActiveWindow();
+            isRunning_IdleWindowTimer = false;
         }
     }
 
     //Method which starts the time window where enemy is idle but is actively parrying
+
+    private Coroutine current_AfterActiveTimer;
+
+    private bool isRunning_AfterActiveTimer;
+
     private void ActiveWindow()
     {
         float time = 0;
         if (healthThreshold.Equals("100"))
         {
-            time = Random.Range(0, maxAfterActiveAttackDelay);
+            time = Random.Range(3, maxAfterActiveAttackDelay);
         }
         else if (healthThreshold.Equals("75"))
         {
-            time = Random.Range(0, maxAfterActiveAttackDelay * 0.66f);
+            time = Random.Range(3 * 0.9f, maxAfterActiveAttackDelay * 0.9f);
         }
         else if (healthThreshold.Equals("50"))
         {
-            time = Random.Range(0, maxAfterActiveAttackDelay * 0.33f);
+            time = Random.Range(3 * 0.8f, maxAfterActiveAttackDelay * 0.8f);
         }
         else if (healthThreshold.Equals("25"))
         {
-            time = Random.Range(0, maxAfterActiveAttackDelay * 0.01f);
+            time = Random.Range(3 * 0.7f, maxAfterActiveAttackDelay * 0.7f);
         }
 
-        hitCount = 0;
-        isInIdle = false;
-        onEnemyUpdateStatus.Raise(this, isInIdle);
         onEnemyCanParry.Raise(this, null);
         isActivelyParrying = true;
 
-        StartCoroutine(AfterActiveTimer(time));
+        if (isRunning_AfterActiveTimer)
+        {
+            StopCoroutine(current_AfterActiveTimer);
+        }
+        current_AfterActiveTimer = StartCoroutine(AfterActiveTimer(time));
 
         //Internal methods
         //Starts a short timer which dictates when the enemy will start an attack string
         IEnumerator AfterActiveTimer(float value)
         {
+            isRunning_AfterActiveTimer = true;
             yield return new WaitForSeconds(value);
             canShoot = true;
+            isRunning_AfterActiveTimer = false;
+            print("from AAT");
         }
     }
 
@@ -225,18 +238,28 @@ public class System_Enemy : MonoBehaviour
         }
     }
 
-    //Is called everytime the enemy is hit by player bullet and has a chance to stop the idle time
+    //Is called everytime the enemy is hit by player bullet
     public void EnemyHitCheck()
     {
-        if (isInIdle && !enemyIsStunned)
+        if (!enemyIsStunned && !isExecutingAttackString)
         {
             hitCount++;
-            int chanceNumber = 80 * hitCount;
+            int chanceNumber = 50 * hitCount;
             int randomNumber = (int)Random.Range(0, 100f);
             if (chanceNumber > randomNumber)
             {
-                StopCoroutine(current_IdleWindowTimer);
-                ActiveWindow();
+                if (isRunning_AfterActiveTimer)
+                {
+                    StopCoroutine(current_AfterActiveTimer);
+                    canShoot = true;
+                    print("from EHC");
+                }
+                else if (isRunning_IdleWindowTimer)
+                {
+                    StopCoroutine(current_IdleWindowTimer);
+                    ActiveWindow();
+                }
+                hitCount = 0;
             }
         }
     } //

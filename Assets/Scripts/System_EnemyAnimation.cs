@@ -7,6 +7,9 @@ public class System_EnemyAnimation : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private GameEvent onEnemyParryPrep;
+
     private bool canParry;
 
     private bool projectileIsPresent;
@@ -37,6 +40,7 @@ public class System_EnemyAnimation : MonoBehaviour
         {
             animator.ResetTrigger("Parry");
             animator.SetTrigger("ParryPrep");
+            onEnemyParryPrep.Raise(this, null);
             isParryPrepped = true;
         }
     }
@@ -50,7 +54,8 @@ public class System_EnemyAnimation : MonoBehaviour
 
     public void TriggerAttackString()
     {
-        animator.SetTrigger("StartString1");
+        int random = Random.Range(1, 4);
+        animator.SetTrigger($"StartString{random}");
     }
 
     public void SetEnemyStun(Component sender, object data)

@@ -920,6 +920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1444462104}
+  onEnemyParryPrep: {fileID: 11400000, guid: e60a9b5dbad323949bd6b0549a03ac17, type: 2}
 --- !u!114 &440690924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3791,9 +3792,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79040ca2c20fe14e995fa7b3365ed24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHealth: 10
-  playerMaxStamina: 30
-  playerMaxSpecial: 70
+  playerMaxHealth: 8
+  playerMaxStamina: 15
+  playerMaxSpecial: 100
   healthSlider: {fileID: 1588880975}
   staminaSlider: {fileID: 618588514}
   specialSlider: {fileID: 384857385}
@@ -4009,7 +4010,6 @@ GameObject:
   - component: {fileID: 1444462112}
   - component: {fileID: 1444462103}
   - component: {fileID: 1444462107}
-  - component: {fileID: 1444462106}
   - component: {fileID: 1444462111}
   - component: {fileID: 1444462110}
   - component: {fileID: 1444462109}
@@ -4019,6 +4019,8 @@ GameObject:
   - component: {fileID: 1444462116}
   - component: {fileID: 1444462119}
   - component: {fileID: 1444462118}
+  - component: {fileID: 1444462121}
+  - component: {fileID: 1444462120}
   m_Layer: 6
   m_Name: Boss1
   m_TagString: Enemy
@@ -4140,9 +4142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869bb075058bc76469bcea71b4fa1e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minIdleTime: 0.5
+  minIdleTime: 3
   maxIdleTime: 5
-  maxAfterActiveAttackDelay: 2
+  maxAfterActiveAttackDelay: 5
   bullet: {fileID: 1307313126725175151, guid: 2e2ffd6e614b6c543ace6d2755a36f85, type: 3}
   shootPoint1: {fileID: 1530978406}
   shootPoint2: {fileID: 1879278195}
@@ -4209,34 +4211,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1444462106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1444462097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 49e4506eb1fdefe4c99cd9bec875a8e4, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1444462102}
-        m_TargetAssemblyTypeName: System_Enemy, Assembly-CSharp
-        m_MethodName: ExecuteAttackString
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1444462107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4297,18 +4271,6 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: System_EnemyAnimation, Assembly-CSharp
-        m_MethodName: TriggerEnemyHit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1444462102}
         m_TargetAssemblyTypeName: System_Enemy, Assembly-CSharp
         m_MethodName: EnemyHitCheck
@@ -4341,6 +4303,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: System_EnemyParticles, Assembly-CSharp
         m_MethodName: SpawnParrySparks
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1444462102}
+        m_TargetAssemblyTypeName: System_Enemy, Assembly-CSharp
+        m_MethodName: EnemyHitCheck
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4529,6 +4503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onEnemyShootConfirm: {fileID: 11400000, guid: 3f0cdad5b3f70b641bfae1a9e1acae59, type: 2}
   onEnemyEndAttackString: {fileID: 11400000, guid: f96f9c4991ec16c4a866d076ed975efd, type: 2}
+  onEnemyEndParry: {fileID: 11400000, guid: eceae5db1f6a3c64783906bc97fc5182, type: 2}
 --- !u!114 &1444462118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4584,6 +4559,62 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1444462120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444462097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: eceae5db1f6a3c64783906bc97fc5182, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1444462102}
+        m_TargetAssemblyTypeName: System_Enemy, Assembly-CSharp
+        m_MethodName: SetIsCurrentlyParrying
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1444462121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444462097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: e60a9b5dbad323949bd6b0549a03ac17, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1444462102}
+        m_TargetAssemblyTypeName: System_Enemy, Assembly-CSharp
+        m_MethodName: SetIsCurrentlyParrying
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1492187784
 GameObject:
@@ -6025,9 +6056,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29aba517275d4114487c73d5bf601e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  maxStamina: 30
-  staminaRecoveryRateBase: 15
+  maxHealth: 8
+  maxStamina: 15
+  staminaRecoveryRateBase: 10
   staminaRecoveryDelay: 1
   staggerTime: 2
   onPlayerStaggerEnable: {fileID: 11400000, guid: 4c9dd12a07fe0dd48b1ab8d0b8dba4a8, type: 2}
@@ -7422,7 +7453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814868278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.82, y: 2.39, z: 0}
+  m_LocalPosition: {x: -14.72, y: 2.39, z: 0}
   m_LocalScale: {x: 10.25, y: 10.45, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7475,7 +7506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58eef61ff14285d4db598e2338cb5ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 9999
+  maxHealth: 8
   onHealthUpdateUI: {fileID: 11400000, guid: ccc3f443ddac07e47a1763a961e92f6a, type: 2}
   onHealthValueChange: {fileID: 11400000, guid: 082e297b4a81c9a4ab3c9c8236c5be74, type: 2}
   DEBUG_onGameEnd: {fileID: 11400000, guid: 946146d5c39f1c94dab5721b8c8ada71, type: 2}
@@ -7498,12 +7529,12 @@ MonoBehaviour:
       - m_Target: {fileID: 1857180526}
         m_TargetAssemblyTypeName: System_PlayerHealth, Assembly-CSharp
         m_MethodName: UpdateHealthValue
-        m_Mode: 0
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: -1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -8590,7 +8621,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2117575518}
   - component: {fileID: 2117575519}
-  - component: {fileID: 2117575524}
   - component: {fileID: 2117575525}
   - component: {fileID: 2117575527}
   - component: {fileID: 2117575526}
@@ -8599,6 +8629,8 @@ GameObject:
   - component: {fileID: 2117575523}
   - component: {fileID: 2117575528}
   - component: {fileID: 2117575529}
+  - component: {fileID: 2117575531}
+  - component: {fileID: 2117575530}
   m_Layer: 6
   m_Name: EnemyStaminaManager
   m_TagString: Untagged
@@ -8635,7 +8667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   maxStamina: 60
-  staminaRecoveryRateBase: 15
+  staminaRecoveryRateBase: 10
   staminaRecoveryDelay: 1
   onEnemyVulnerable: {fileID: 11400000, guid: ee68e6076c3332648981bd030c7671a5, type: 2}
   onStaminaUpdateUI: {fileID: 11400000, guid: 348e183a2b220c54490b271cdde10728, type: 2}
@@ -8744,34 +8776,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: -2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2117575524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117575517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 5c600137bf901e04c959ce7017df4e0e, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2117575519}
-        m_TargetAssemblyTypeName: System_EnemyStamina, Assembly-CSharp
-        m_MethodName: SetEnemyIsIdle
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8927,4 +8931,60 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2117575530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117575517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: f96f9c4991ec16c4a866d076ed975efd, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2117575519}
+        m_TargetAssemblyTypeName: System_EnemyStamina, Assembly-CSharp
+        m_MethodName: SetIsCurrentlyAttacking
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2117575531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117575517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916f461070e244cb41f0b22a173b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c2a3f91ab2643204c82cbe3af51832d1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2117575519}
+        m_TargetAssemblyTypeName: System_EnemyStamina, Assembly-CSharp
+        m_MethodName: SetIsCurrentlyAttacking
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
