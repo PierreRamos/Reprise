@@ -5541,7 +5541,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: -5
+          m_FloatArgument: -3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -8668,7 +8668,7 @@ MonoBehaviour:
   maxHealth: 30
   maxStamina: 60
   staminaRecoveryRateBase: 10
-  staminaRecoveryDelay: 1
+  staminaRecoveryDelay: 1.5
   onEnemyVulnerable: {fileID: 11400000, guid: ee68e6076c3332648981bd030c7671a5, type: 2}
   onStaminaUpdateUI: {fileID: 11400000, guid: 348e183a2b220c54490b271cdde10728, type: 2}
   DEBUG_onGameEnd: {fileID: 11400000, guid: 946146d5c39f1c94dab5721b8c8ada71, type: 2}
@@ -8887,7 +8887,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -10
+          m_IntArgument: -6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
