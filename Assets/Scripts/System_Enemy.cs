@@ -176,10 +176,8 @@ public class System_Enemy : MonoBehaviour
         IEnumerator IdleWindowTimer(float value)
         {
             isRunning_IdleWindowTimer = true;
-            print(value);
             yield return new WaitForSeconds(value);
             ActiveWindow();
-            print("from IWT");
             isRunning_IdleWindowTimer = false;
         }
     }
